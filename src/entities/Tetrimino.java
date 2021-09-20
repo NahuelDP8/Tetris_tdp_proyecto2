@@ -7,6 +7,7 @@ public abstract class Tetrimino {
 	protected String pathPhoto; 
 	protected int rotacion; 
 	protected ArrayList<Celda> listaCeldas;
+	//Constructor
 	public Tetrimino(int rotacion, String pathPhoto, Celda c1, Celda c2, Celda c3, Celda c4)  {
 		this.rotacion = rotacion;
 		this.pathPhoto = pathPhoto;
@@ -16,7 +17,7 @@ public abstract class Tetrimino {
 		listaCeldas.add(c4);
 	}
 	
-	abstract public ArrayList<PairTupla> rotar(); 
+	abstract public ArrayList<PairTupla> rotar(ArrayList<PairTupla> lista); 
 	
 	//A modificar
 	public ArrayList<Celda> getCeldas(){

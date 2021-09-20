@@ -4,10 +4,12 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import Logic.Logica;
+
 public class GUI {
-
+	
 	private JFrame frame;
-
+	private Logica log;
 	/**
 	 * Launch the application.
 	 */
@@ -29,6 +31,7 @@ public class GUI {
 	 */
 	public GUI() {
 		initialize();
+		log = new Logica(this);
 	}
 
 	/**
@@ -39,5 +42,21 @@ public class GUI {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	public void captarMovimientoIzq() {}
+	
+	public void captarMovimientoDer() {}
+	
+	public void captarOpcionRotar() {}
+	
+	public void actualizarCelda(int fila, int columna, String imagen) {}
 
+	public void gameOver() {}
+	
+	public void actualizaPuntaje(int puntaje) {}
+
+	public void actualizarReloj() {}
+
+	
+	
 }
