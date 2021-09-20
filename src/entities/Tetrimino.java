@@ -6,8 +6,7 @@ public abstract class Tetrimino {
 	//Atributos de clase
 	protected String pathPhoto; 
 	protected int rotacion; 
-	protected ArrayList<Celda> listaCeldas; 
-	
+	protected ArrayList<Celda> listaCeldas;
 	public Tetrimino(int rotacion, String pathPhoto, Celda c1, Celda c2, Celda c3, Celda c4)  {
 		this.rotacion = rotacion;
 		this.pathPhoto = pathPhoto;
@@ -19,69 +18,80 @@ public abstract class Tetrimino {
 	
 	abstract public ArrayList<PairTupla> rotar(); 
 	
-	public ArrayList<PairTupla> moverDerecha() {
-		//Esto se puede optimizar probablemente
-		ArrayList<PairTupla> retorno = new ArrayList<PairTupla>();
-		//Esto se puede optimizar probablemente
-		for(int i = 0; i<=3; i++) {
-			Celda aux = listaCeldas.get(i); 
-			retorno.add(new PairTupla(aux.getX()+1, aux.getY()));		
-		}
-		
-		posicionesAModificar(retorno);
-		return retorno;
-	}
-	
-	public ArrayList<PairTupla> moverIzquierda(){
-		//Esto se puede optimizar probablemente
-				ArrayList<PairTupla> retorno = new ArrayList<PairTupla>();
-				//Esto se puede optimizar probablemente
-		for(int i = 0; i<=3; i++) {
-			Celda aux = listaCeldas.get(i); 
-			retorno.add(new PairTupla(aux.getX()-1, aux.getY()));		
-		}			
-			posicionesAModificar(retorno);
-			return retorno;
-	}
-	
-	public String getPathPhoto() {
-		return pathPhoto;
-	}
-	
-	public ArrayList<PairTupla> moverAbajo(){
-		//Esto se puede optimizar probablemente
-				ArrayList<PairTupla> retorno = new ArrayList<PairTupla>();
-				//Esto se puede optimizar probablemente
-		for(int i = 0; i<=3; i++) {
-			Celda aux = listaCeldas.get(i); 
-			retorno.add(new PairTupla(aux.getX(), aux.getY()+1));		
-		}			
-			posicionesAModificar(retorno);
-			return retorno;
-	}
-	
 	//A modificar
 	public ArrayList<Celda> getCeldas(){
 		return listaCeldas;
 	}
 	
-	//Modifica una estructura, en este caso ArrayList, dejando solo aquellas posiciones futuras que serán modificadas 
-	//debido a alguna modificación de la ocupación del tetrimino.
-	private void posicionesAModificar(ArrayList<PairTupla> lista ){
+	public String getPathPhoto() {
+		return pathPhoto;
+	}
+	public void setCeldas(int i, Celda reemplazo) {
+		listaCeldas.set(i, reemplazo);
+	}
+	
+	public ArrayList<PairTupla> moverDerecha(ArrayList<PairTupla> futuras) {
+		//Esto se puede optimizar probablemente
+		ArrayList<PairTupla> retorno = new ArrayList<PairTupla>();
+		//Esto se puede optimizar probablemente
+		for(int i = 0; i<=3; i++) {
+			Celda aux = listaCeldas.get(i); 
+			int xc = aux.getX();
+			int yc = aux.getY();
+			futuras.add(new PairTupla(xc+1, yc));		
+			retorno.add(new PairTupla(xc,yc));	
+		}			
+		posAOcuparYDesocupar(futuras, retorno);
+		return retorno;
+	}
+	
+	public ArrayList<PairTupla> moverIzquierda(ArrayList<PairTupla> futuras){
+		//Esto se puede optimizar probablemente
+		ArrayList<PairTupla> retorno = new ArrayList<PairTupla>();
+		//Esto se puede optimizar probablemente
+		for(int i = 0; i<=3; i++) {
+			Celda aux = listaCeldas.get(i); 
+			int xc = aux.getX();
+			int yc = aux.getY();
+			futuras.add(new PairTupla(xc-1, yc));		
+			retorno.add(new PairTupla(xc,yc));	
+		}			
+		posAOcuparYDesocupar(futuras, retorno);
+		return retorno;
+	}
+	
+	
+	public ArrayList<PairTupla> moverAbajo(ArrayList<PairTupla> futuras){
+		//Esto se puede optimizar probablemente
+		ArrayList<PairTupla> retorno = new ArrayList<PairTupla>();
+				//Esto se puede optimizar probablemente
+		for(int i = 0; i<=3; i++) {
+			Celda aux = listaCeldas.get(i); 
+			int xc = aux.getX();
+			int yc = aux.getY();
+			futuras.add(new PairTupla(xc, yc+1));		
+			retorno.add(new PairTupla(xc,yc));	
+		}			
+			posAOcuparYDesocupar(futuras, retorno);
+			return retorno;
+	}
+	
+	private void posAOcuparYDesocupar(ArrayList<PairTupla> futuras , ArrayList<PairTupla> actuales ){
 		boolean encontrado = false;
-		int p = 3;
+		int p = 3, x=3;
 		for(int i =0; i<=p; i++) {
-					PairTupla auxPair = lista.get(i);
-					for(int j = 0; j<=3 && !encontrado; j++) {
-						Celda auxCelda = listaCeldas.get(j);
-						if(auxCelda.getX() == auxPair.getX() && auxCelda.getY() == auxPair.getY()) {
+					PairTupla auxPair = futuras.get(i);
+					for(int j = 0; j<=x && !encontrado; j++) {
+						PairTupla auxDupla = actuales.get(j);
+						if(auxDupla.getX() == auxPair.getX() && auxDupla.getY() == auxPair.getY()) {
 							encontrado=true;
 							p--;
-							lista.remove(i);
-						}
+							futuras.remove(i);
+							x--;
+							actuales.remove(j);
+						} 
 					}
 					encontrado=false;
 				}
 	}
-	
 }
