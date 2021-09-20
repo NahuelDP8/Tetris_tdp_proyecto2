@@ -4,7 +4,6 @@ import entities.*;
 //import java.util.Random;
 import java.util.ArrayList;
 
-
 import GUI.*;
 
 public class Logica {
@@ -156,6 +155,11 @@ public class Logica {
 			hayUnaVacia=false;
 		}		
 	
+	}
+
+	public void actualizarReloj() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/*private void modificarMatrizLineaLlena(int y) {

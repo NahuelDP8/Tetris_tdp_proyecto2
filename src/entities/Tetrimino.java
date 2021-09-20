@@ -17,7 +17,8 @@ public abstract class Tetrimino {
 		listaCeldas.add(c4);
 	}
 	
-	abstract public ArrayList<PairTupla> rotar(ArrayList<PairTupla> lista); 
+
+	abstract public ArrayList<PairTupla> rotar(ArrayList<PairTupla> antiguas); 
 	
 	//A modificar
 	public ArrayList<Celda> getCeldas(){

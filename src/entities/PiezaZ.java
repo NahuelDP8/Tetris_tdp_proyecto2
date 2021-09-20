@@ -2,9 +2,9 @@ package entities;
 
 import java.util.ArrayList;
 
-public class PiezaI extends Tetrimino{
-	private static final String path = "pathDeLafotitoI";
-	public PiezaI(int rotacion, Celda c1, Celda c2, Celda c3, Celda c4) {
+public class PiezaZ extends Tetrimino{
+	private static final String path = "pathDeLafotitoS";
+	public PiezaZ(int rotacion, Celda c1, Celda c2, Celda c3, Celda c4) {
 		super(rotacion, path,c1,c2,c3,c4);
 	}
 	
@@ -15,7 +15,9 @@ public class PiezaI extends Tetrimino{
 		    while (!sorted) {
 		        sorted = true;
 		        for (int i = 0; i < lista.size()-1; i++) {
-		            if (lista.get(i).getX() > (lista.get(i + 1).getX())) {
+		            if ((lista.get(i).getX() > (lista.get(i + 1).getX()) ||
+		            		((lista.get(i).getX()) == (lista.get(i + 1).getX())
+		            		&& (lista.get(i).getY()) > (lista.get(i + 1).getY())))) {
 		                temp = lista.get(i);
 		                lista.set(i, lista.get(i + 1));
 		                lista.set(i + 1, temp);
@@ -27,7 +29,9 @@ public class PiezaI extends Tetrimino{
 		    while (!sorted) {
 		        sorted = true;
 		        for (int i = 0; i < lista.size()-1; i++) {
-		            if (lista.get(i).getY() > (lista.get(i + 1).getY())) {
+		        	if ((lista.get(i).getY() > (lista.get(i + 1).getY()) ||
+		            		((lista.get(i).getY()) == (lista.get(i + 1).getY())
+		            		&& (lista.get(i).getX()) < (lista.get(i + 1).getX())))) {
 		                temp = lista.get(i);
 		                lista.set(i, lista.get(i + 1));
 		                lista.set(i + 1, temp);
@@ -51,55 +55,39 @@ public class PiezaI extends Tetrimino{
 			
 			celdaAux = listaCeldas.get(1);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX(), celdaAux.getY()+1));
-			
-			celdaAux = listaCeldas.get(3);
-			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()+1));	
+			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()));	
 			
 			rotacion = 90;
 		} else if(rotacion == 90){
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()-2, celdaAux.getY()+2));
+			futuras.add(new PairTupla(celdaAux.getX()-2, celdaAux.getY()+1));
 			
 			celdaAux = listaCeldas.get(1);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()+1));
-			
-			celdaAux = listaCeldas.get(3);
-			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()-1));
+			futuras.add(new PairTupla(celdaAux.getX(), celdaAux.getY()+1));
 			
 			rotacion = 180;
 			
 		} else if(rotacion == 180){
-			celdaAux = listaCeldas.get(0);
-			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()-2));
-			
 			celdaAux = listaCeldas.get(2);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()));
 			
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()-2, celdaAux.getY()+1));
+			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()-2));;
 
 			rotacion = 270;
 			
 		} else if(rotacion == 270){
-			celdaAux = listaCeldas.get(0);
+			celdaAux = listaCeldas.get(2);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()+2));
-			
-			celdaAux = listaCeldas.get(1);
-			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()+1));
-			
+			futuras.add(new PairTupla(celdaAux.getX(), celdaAux.getY()-1));
+
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()+2, celdaAux.getY()+1));
+			futuras.add(new PairTupla(celdaAux.getX()+2, celdaAux.getY()-1));
 			
 			rotacion = 0;
 			
