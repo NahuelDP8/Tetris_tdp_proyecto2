@@ -3,10 +3,12 @@ package GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class GUI {
 
 	private JFrame frame;
+	private JLabel [][] labels = new JLabel[21][10];
 	
 
 	/**
@@ -37,8 +39,20 @@ public class GUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100,100,300,630);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		JLabel label;
+		
+		
+		for(int i = 0; i<labels[0].length;i++) {
+			for(int j = 0; j<labels.length;j++) {
+				label = new JLabel(Integer.toString(i)+'-'+Integer.toString(j));
+				label.setBounds(i*30, j*30, 30, 30);
+				frame.getContentPane().add(label);
+				labels[j][i] = label;
+			}
+		}
+		
 	}
-
 }
