@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 public class GUI {
 
 	private JFrame frame;
+	
 
 	/**
 	 * Launch the application.
