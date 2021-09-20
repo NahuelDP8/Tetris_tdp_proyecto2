@@ -71,7 +71,6 @@ public class GUI {
 	
 	public void actualizaPuntaje(int puntaje) {}
 
-	public void actualizarReloj() {}
-
+	public void actualizarReloj(int minutos, int segundos) {}
 	
 }
