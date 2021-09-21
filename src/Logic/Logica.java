@@ -25,11 +25,12 @@ public class Logica {
 		for(int i = 0; i<=24; i++) {
 			for(int j  = 0; j<=9; j++) {
 				matrizCeldas [i][j] = new Celda(j,i, false, imagenes.getGrisVacio());  
+				matrizCeldas [i][j].setOcupado(false);
 			}
 		}
+
 		this.crearTetrimino();
 		this.miReloj = new Reloj(this); 
-		this.crearTetrimino();
 	}
 	
 	private boolean verificarPerdidaJuego() {
@@ -42,7 +43,7 @@ public class Logica {
 	}
 	
 	private void crearTetrimino() { 
-		//Antes de crear un tetrimino debemos verificar que no hayamos perdido 
+		//Antes de crear un tetrimino debemos verificar que no hayamos perdido
 		boolean perdimos = this.verificarPerdidaJuego();
 		if(perdimos) {
 			this.gameOver();
@@ -51,15 +52,17 @@ public class Logica {
 			int max = 7;
 			Random random = new Random();
 			//Nos devuelve un número aleatorio del 1 al 7
-			int valor = random.nextInt(max + min) + min;	
+			int valor = random.nextInt(max - min) + min;	
 			switch (valor) {
-				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]);
-				case 2:  tetriminoActual = new PiezaJ(0,matrizCeldas[1][3], matrizCeldas[2][3], matrizCeldas[2][4], matrizCeldas[2][5]);
-				case 3:  tetriminoActual = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]);
-				case 4:  tetriminoActual = new PiezaO(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][4], matrizCeldas[2][5]);
-				case 5:  tetriminoActual = new PiezaZ(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][5], matrizCeldas[2][6]);
-				case 6:  tetriminoActual = new PiezaT(0,matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[1][3], matrizCeldas[1][5]);
-				case 7:  tetriminoActual = new PiezaS(0,matrizCeldas[1][5], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[2][3]);
+
+				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]); break;
+				case 2:  tetriminoActual = new PiezaJ(0,matrizCeldas[1][3], matrizCeldas[2][3], matrizCeldas[2][4], matrizCeldas[2][5]); break;
+				case 3:  tetriminoActual = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]); break;
+				case 4:  tetriminoActual = new PiezaO(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][4], matrizCeldas[2][5]); break;
+				case 5:  tetriminoActual = new PiezaZ(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][5], matrizCeldas[2][6]); break;
+				case 6:  tetriminoActual = new PiezaT(0,matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[1][3], matrizCeldas[1][5]); break;
+				case 7:  tetriminoActual = new PiezaS(0,matrizCeldas[1][5], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[2][3]); break;
+
 			}
 		}	
 	} 
@@ -68,6 +71,7 @@ public class Logica {
 		//Debemos para el reloj y el corrimiento automático hacia abajo del tetrimino actual. 
 		this.miReloj.gameOver();
 		//Debemos avisarle a la gui que terminó el juego. 
+		System.out.print("F");
 		this.miGui.gameOver();
 	}
 
@@ -104,6 +108,10 @@ public class Logica {
 		////Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> desocupar = tetriminoActual.moverIzquierda(ocupar);
 		
+		//Solo para ver q devuelve mover izquierda:
+		for(PairTupla f: ocupar)
+			System.out.println("("+f.getX()+","+f.getY()+")");
+		
 		verificado = verificarPosicionesFuturas(ocupar);
 		if(verificado) {
 			realizarMovimientos(ocupar, desocupar);
@@ -126,6 +134,7 @@ public class Logica {
 			if(lineasCompletas!=0) {
 				this.sumarPuntaje(lineasCompletas);
 			}
+			crearTetrimino();
 		}
 	}
 	
@@ -139,6 +148,7 @@ public class Logica {
 		}else {
 			puntos = puntos + 800;
 		}
+		
 	}
 
 	private boolean verificarPosicionesFuturas(ArrayList<PairTupla> futuras) {
@@ -178,6 +188,7 @@ public class Logica {
 					celT.set(j, cOcupar);
 					cOcupar.actualizarImagen(tetriminoActual.getPhoto());
 					cOcupar.setOcupado(true);
+					cDesocupar.setOcupado(false);
 					this.actualizarCelda(cOcupar);
 				}
 			}
