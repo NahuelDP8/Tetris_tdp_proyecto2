@@ -11,6 +11,7 @@ public abstract class Tetrimino {
 	protected ArrayList<Celda> listaCeldas;
 	//Constructor
 	public Tetrimino(int rotacion, ImageIcon Photo, Celda c1, Celda c2, Celda c3, Celda c4)  {
+		listaCeldas = new ArrayList<Celda>();
 		this.rotacion = rotacion;
 		this.Photo = Photo;
 		listaCeldas.add(c1);

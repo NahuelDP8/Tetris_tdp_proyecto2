@@ -72,10 +72,6 @@ public class ImagenesEscaladas {
 		return EscaladaVioleta;
 	}
 
-
-
-
-
-
-
 }
+
+
