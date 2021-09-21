@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import Logic.Logica;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import java.awt.Color;
 
 public class GUI implements KeyListener {
 	
@@ -61,19 +62,20 @@ public class GUI implements KeyListener {
 		panelMatriz.setLayout(null);
 		
 		JPanel PTiempo = new JPanel();
+		PTiempo.setBackground(Color.RED);
 		PTiempo.setBounds(0, 0, 250, 101);
 		panelMatriz.add(PTiempo);
 		PTiempo.setLayout(null);
 		
 		JLTiempo = new JLabel("00:00");
-		JLTiempo.setBounds(60, 28, 80, 33);
+		JLTiempo.setBounds(92, 58, 80, 33);
 		PTiempo.add(JLTiempo);
 		panelMatriz.addKeyListener(this);
 		JLabel label;
 		
 		for(int i = 0; i<labels[0].length;i++) {
 			for(int j = 0; j<labels.length;j++) {
-				label = new JLabel(i+"-"+j);
+				label = new JLabel("");
 				label.setBounds(i*25, j*25, 25, 25);
 				ImageIcon vacioFoto =new ImageIcon(GUI.class.getResource("/imagenes/grisVacio.png"));
 				Image EscalarFoto = vacioFoto.getImage().getScaledInstance(label.getWidth(),label.getHeight(), Image.SCALE_SMOOTH);

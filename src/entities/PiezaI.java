@@ -8,11 +8,10 @@ import javax.swing.ImageIcon;
 
 public class PiezaI extends Tetrimino{
 
-	private static ImageIcon miFoto =new ImageIcon(PiezaI.class.getResource("/imagenes/violeta.png"));
-	private static Image EscalarFoto = miFoto.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
-	private static ImageIcon miFotoEscalada = new ImageIcon(EscalarFoto);
 	public PiezaI(int rotacion, Celda c1, Celda c2, Celda c3, Celda c4) {
-		super(rotacion, miFotoEscalada,c1,c2,c3,c4);
+		super(rotacion, null,c1,c2,c3,c4);
+		ImagenesEscaladas imagenes=new ImagenesEscaladas();
+		this.setImageIcon(imagenes.getCeleste());
 	}
 	
 	private void ordenar(ArrayList<Celda> lista) {
