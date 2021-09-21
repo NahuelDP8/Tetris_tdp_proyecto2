@@ -16,7 +16,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class GUI extends JFrame{
+public class GUI{
 	
 	private JFrame frame;
 	private Logica log;
@@ -27,7 +27,7 @@ public class GUI extends JFrame{
 	private JPanel PMatriz;
 	private JPanel PPerdiste;
 	private JLabel JLPerdiste;
-	private EventoDeTeclado tecla=new EventoDeTeclado();
+	
 	
 	/**
 	 * Launch the application.
@@ -51,26 +51,26 @@ public class GUI extends JFrame{
 	public GUI() {
 		initialize();
 		log = new Logica(this);
-		addKeyListener(tecla);
-		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//Listener Eventos
+		EventoDeTeclado tecla=new EventoDeTeclado();
 		frame = new JFrame();
 		frame.setBounds(400,60,400,750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.addKeyListener(tecla);
 		
+		
 		PPerdiste = new JPanel();
 		PPerdiste.setBackground(new Color(0, 0, 0));
 		PPerdiste.setBounds(10, 247, 346, 133);
 		frame.getContentPane().add(PPerdiste);
 		PPerdiste.setLayout(null);
-		PPerdiste.addKeyListener(tecla);
 		
 		
 	
@@ -88,14 +88,12 @@ public class GUI extends JFrame{
 		PMatriz.setBounds(50, 50, 250, 625);
 		frame.getContentPane().add(PMatriz);
 		PMatriz.setLayout(null);
-		PMatriz.addKeyListener(tecla);
 	
 		PTiempo = new JPanel();
 		PTiempo.setBackground(Color.WHITE);
 		PTiempo.setBounds(0, 0, 250, 101);
 		PMatriz.add(PTiempo);
 		PTiempo.setLayout(null);
-		PTiempo.addKeyListener(tecla);
 		
 		
 		JLTiempo = new JLabel("00:00");
