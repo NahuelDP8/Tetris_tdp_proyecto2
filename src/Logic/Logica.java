@@ -18,6 +18,7 @@ public class Logica {
 
 		this.puntos = 0;
 
+
 		imagenes=new ImagenesEscaladas();
 		puntos = 0;
 		this.miGui = miGui;
@@ -27,6 +28,7 @@ public class Logica {
 				matrizCeldas [i][j].setOcupado(false);
 			}
 		}
+
 		this.crearTetrimino();
 		this.miReloj = new Reloj(this); 
 	}
@@ -52,6 +54,7 @@ public class Logica {
 			//Nos devuelve un número aleatorio del 1 al 7
 			int valor = random.nextInt(max - min) + min;
 			switch (valor) {
+
 				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]); break;
 				case 2:  tetriminoActual = new PiezaJ(0,matrizCeldas[1][3], matrizCeldas[2][3], matrizCeldas[2][4], matrizCeldas[2][5]); break;
 				case 3:  tetriminoActual = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]); break;
@@ -59,6 +62,7 @@ public class Logica {
 				case 5:  tetriminoActual = new PiezaZ(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][5], matrizCeldas[2][6]); break;
 				case 6:  tetriminoActual = new PiezaT(0,matrizCeldas[2][4], matrizCeldas[1][4], matrizCeldas[2][3], matrizCeldas[2][5]); break;
 				case 7:  tetriminoActual = new PiezaS(0,matrizCeldas[1][5], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[2][3]); break;
+
 			}
 		}	
 	} 
@@ -103,10 +107,6 @@ public class Logica {
 		////Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> desocupar = tetriminoActual.moverIzquierda(ocupar);
 		
-		//Solo para ver q devuelve mover izquierda:
-		for(PairTupla f: ocupar)
-			System.out.println("("+f.getX()+","+f.getY()+")");
-		
 		verificado = verificarPosicionesFuturas(ocupar);
 		if(verificado) {
 			realizarMovimientos(ocupar, desocupar);
@@ -121,14 +121,14 @@ public class Logica {
 		////Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> desocupar = tetriminoActual.moverAbajo(ocupar);
 		
-		verificado = verificarPosicionesFuturas(ocupar);
+		verificado = verificarPosicionesFuturas(ocupar);	
 		if(verificado) {
 			realizarMovimientos(ocupar, desocupar);
 		} else{
 			int lineasCompletas = this.buscarLineasCompletas();
 			if(lineasCompletas!=0) {
 				this.sumarPuntaje(lineasCompletas);
-			}
+				this.miGui.actualizaPuntaje(this.puntos);			}
 			crearTetrimino();
 		}
 	}
@@ -198,7 +198,7 @@ public class Logica {
 	private int buscarLineasCompletas() {
 		int cantLineasCompletas = 0; 
 		boolean hayUnaVacia = false;
-		for(int i =0; i < 25 ; i++ ) {
+		for(int i =4; i < 25 ; i++ ) {
 			if(matrizCeldas[i][0].getOcupado()==true) { 
 				for( int j = 1; j < 10 && !hayUnaVacia;j++ ) {
 					if(matrizCeldas[i][j].getOcupado() == false)
@@ -223,7 +223,7 @@ public class Logica {
 		boolean detener = false;
 		//contador de celdas no ocupadas
 		int celdasNoOcupadas = 0;
-		for(int i =y; i>=0 && detener; y--) {
+		for(int i =y; i>=4 && !detener; i--) {
 			//caso excepcional en el que queremos setear lo que está en la fila de arriba con respecto al comienzo de la matriz
 			if(i == 0) {
 				this.liberarLinea(0);
@@ -234,14 +234,14 @@ public class Logica {
 				actual.setOcupado(arriba.getOcupado());
 				actual.actualizarImagen(arriba.getImagen());
 				this.actualizarCelda(actual);
-				if(actual.getOcupado()==false) {
+				if(arriba.getOcupado()==false) {
 					celdasNoOcupadas++;
 				}
 			}
 			//En caso de que la última fila que hayamos modificado represente una linea vacía, entonces no necesitamos seguir recorriendo la matriz.
 			//lo que restan son todas celdas no ocupadas
 			if(celdasNoOcupadas ==10)
-				detener =true;
+				detener=true;
 		}
 	}
 

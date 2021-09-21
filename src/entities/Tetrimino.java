@@ -94,8 +94,10 @@ public abstract class Tetrimino {
 							p--;
 							futuras.remove(auxPair);
 							x--;
-							actuales.remove(auxDupla);
-							j--;i--;
+							actuales.remove(j);
+							i--;
+							j--;
+
 						} 
 					}
 				}

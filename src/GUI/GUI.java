@@ -125,18 +125,18 @@ public class GUI{
 	}	
 	public void captarMovimientoIzq() {
 		log.moverIzquierda();
-		JLPuntaje.setText("vije cuidado a la IZQUIERDA");
+		
 	}
 	
 	
 	public void captarMovimientoDer() {
 		log.moverDerecha();
-		JLPuntaje.setText("DERECHA PAPA ");
+		
 	}
 	
 	public void captarOpcionRotar() {
 		log.rotarTetrimino();
-		JLPuntaje.setText("GIRAAAA");
+		
 	}
 	
 	//actualiza la imagen
