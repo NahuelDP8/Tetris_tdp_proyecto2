@@ -52,7 +52,8 @@ public class Logica {
 			int max = 7;
 			Random random = new Random();
 			//Nos devuelve un número aleatorio del 1 al 7
-			int valor = random.nextInt(max - min) + min;	
+			//int valor = random.nextInt(max - min) + min;
+			int valor = 7;
 			switch (valor) {
 
 				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]); break;
@@ -60,7 +61,7 @@ public class Logica {
 				case 3:  tetriminoActual = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]); break;
 				case 4:  tetriminoActual = new PiezaO(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][4], matrizCeldas[2][5]); break;
 				case 5:  tetriminoActual = new PiezaZ(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][5], matrizCeldas[2][6]); break;
-				case 6:  tetriminoActual = new PiezaT(0,matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[1][3], matrizCeldas[1][5]); break;
+				case 6:  tetriminoActual = new PiezaT(0,matrizCeldas[2][4], matrizCeldas[1][4], matrizCeldas[2][3], matrizCeldas[2][5]); break;
 				case 7:  tetriminoActual = new PiezaS(0,matrizCeldas[1][5], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[2][3]); break;
 
 			}
@@ -81,10 +82,16 @@ public class Logica {
 		ArrayList<PairTupla> ocupar =  new ArrayList<PairTupla> (); 
 		////Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> desocupar = tetriminoActual.rotar(ocupar);		
-		verificado = verificarPosicionesFuturas(ocupar);
+		verificado = verificarPosicionesFuturas(desocupar);
 		if(verificado) {
-			realizarMovimientos(ocupar, desocupar);
+			realizarMovimientos(desocupar, ocupar);
 		}
+		for(PairTupla f: ocupar)
+			System.out.println("("+f.getX()+","+f.getY()+")");
+		System.out.println("__");
+		for(PairTupla f: desocupar)
+			System.out.println("("+f.getX()+","+f.getY()+")");
+		System.out.print(verificado);
 	}
 	
 	public void moverDerecha() {
