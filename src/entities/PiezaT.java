@@ -11,10 +11,12 @@ public class PiezaT extends Tetrimino{
 		ImagenesEscaladas imagenes=new ImagenesEscaladas();
 		this.setImageIcon(imagenes.getVioleta());
 	}
-	
+	// Ordena la lista de celdas, para facilitar su manejo:
 	private void ordenar(ArrayList<Celda> lista) {
+		//Mediante metodo burbuja, ordena la lista segun su posicion.
 		Celda temp;
 	    boolean sorted = false;
+	    // Si esta en sentido horizontal ordena segun x:
 	    if (rotacion == 0 || rotacion == 180) {
 		    while (!sorted) {
 		        sorted = true;
@@ -29,6 +31,7 @@ public class PiezaT extends Tetrimino{
 		            }
 		        }
 		    }
+		 // Si esta en sentido vertical ordena segun y:
 	    } else if (rotacion == 90 || rotacion == 270) {
 		    while (!sorted) {
 		        sorted = true;
@@ -56,26 +59,20 @@ public class PiezaT extends Tetrimino{
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()+1));
-					
-			rotacion = 90;
 		} else if(rotacion == 90){
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()+1));
-			rotacion = 180;
 			
 		} else if(rotacion == 180){
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()-1));
-			rotacion = 270;
 			
 		} else if(rotacion == 270){
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()-1));
-			
-			rotacion = 0;
+			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()-1));;
 			
 		}
 			
