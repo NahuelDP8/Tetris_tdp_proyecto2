@@ -52,8 +52,7 @@ public class Logica {
 			int max = 7;
 			Random random = new Random();
 			//Nos devuelve un número aleatorio del 1 al 7
-			//int valor = random.nextInt(max - min) + min;
-			int valor = 7;
+			int valor = random.nextInt(max - min) + min;
 			switch (valor) {
 
 				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]); break;
@@ -86,12 +85,6 @@ public class Logica {
 		if(verificado) {
 			realizarMovimientos(desocupar, ocupar);
 		}
-		for(PairTupla f: ocupar)
-			System.out.println("("+f.getX()+","+f.getY()+")");
-		System.out.println("__");
-		for(PairTupla f: desocupar)
-			System.out.println("("+f.getX()+","+f.getY()+")");
-		System.out.print(verificado);
 	}
 	
 	public void moverDerecha() {
