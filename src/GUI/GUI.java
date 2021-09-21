@@ -13,14 +13,21 @@ import Logic.Logica;
 
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
-public class GUI implements KeyListener {
+public class GUI extends JFrame{
 	
 	private JFrame frame;
 	private Logica log;
 	private JLabel [][] labels = new JLabel[25][10];
 	private JLabel JLTiempo;
 	private JLabel JLPuntaje;
+	private JPanel PTiempo;
+	private JPanel PMatriz;
+	private JPanel PPerdiste;
+	private JLabel JLPerdiste;
+	private EventoDeTeclado tecla=new EventoDeTeclado();
 	
 	/**
 	 * Launch the application.
@@ -44,6 +51,8 @@ public class GUI implements KeyListener {
 	public GUI() {
 		initialize();
 		log = new Logica(this);
+		addKeyListener(tecla);
+		
 	}
 
 	/**
@@ -54,25 +63,53 @@ public class GUI implements KeyListener {
 		frame.setBounds(400,60,400,750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.addKeyListener(tecla);
+		
+		PPerdiste = new JPanel();
+		PPerdiste.setBackground(new Color(0, 0, 0));
+		PPerdiste.setBounds(10, 247, 346, 133);
+		frame.getContentPane().add(PPerdiste);
+		PPerdiste.setLayout(null);
+		PPerdiste.addKeyListener(tecla);
+		
+		
+	
+		JLPerdiste = new JLabel("Lo siento has sido derrotado");
+		JLPerdiste.setForeground(new Color(0, 128, 0));
+		JLPerdiste.setBackground(new Color(0, 128, 0));
+		JLPerdiste.setToolTipText("");
+		JLPerdiste.setHorizontalAlignment(SwingConstants.CENTER);
+		JLPerdiste.setFont(new Font("Stencil", Font.PLAIN, 20));
+		JLPerdiste.setBounds(0, 10, 354, 123);
+		PPerdiste.add(JLPerdiste);
 		
 		//Panel donde se crea la matriz
-		JPanel panelMatriz = new JPanel();
-		panelMatriz.setBounds(50, 50, 250, 625);
-		frame.getContentPane().add(panelMatriz);
-		panelMatriz.setLayout(null);
-		
-		JPanel PTiempo = new JPanel();
-		PTiempo.setBackground(Color.RED);
-		PTiempo.setBounds(0, 0, 250, 0);
-		panelMatriz.add(PTiempo);
+		PMatriz = new JPanel();
+		PMatriz.setBounds(50, 50, 250, 625);
+		frame.getContentPane().add(PMatriz);
+		PMatriz.setLayout(null);
+		PMatriz.addKeyListener(tecla);
+	
+		PTiempo = new JPanel();
+		PTiempo.setBackground(Color.WHITE);
+		PTiempo.setBounds(0, 0, 250, 101);
+		PMatriz.add(PTiempo);
 		PTiempo.setLayout(null);
+		PTiempo.addKeyListener(tecla);
+		
 		
 		JLTiempo = new JLabel("00:00");
-		JLTiempo.setBounds(92, 58, 80, 33);
+		JLTiempo.setFont(new Font("Magneto", Font.BOLD | Font.ITALIC, 48));
+		JLTiempo.setBounds(31, 10, 209, 52);
 		PTiempo.add(JLTiempo);
-		panelMatriz.addKeyListener(this);
-		JLabel label;
 		
+		JLPuntaje = new JLabel("Puntaje: 0");
+		JLPuntaje.setFont(new Font("OCR A Extended", Font.BOLD | Font.ITALIC, 20));
+		JLPuntaje.setBounds(10, 66, 230, 25);
+		PTiempo.add(JLPuntaje);
+		
+		
+		JLabel label;
 		for(int i = 0; i<labels[0].length;i++) {
 			for(int j = 0; j<labels.length;j++) {
 				label = new JLabel("");
@@ -81,37 +118,40 @@ public class GUI implements KeyListener {
 				Image EscalarFoto = vacioFoto.getImage().getScaledInstance(label.getWidth(),label.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon vacioFotoEscalada = new ImageIcon(EscalarFoto);
 				label.setIcon(vacioFotoEscalada);
-				panelMatriz.add(label);
+				PMatriz.add(label);
 				labels[j][i] = label;
 			}
 		}
+		PPerdiste.setVisible(false);
 		
 	}	
 	public void captarMovimientoIzq() {
 		log.moverIzquierda();
+		JLPuntaje.setText("vije cuidado a la IZQUIERDA");
 	}
 	
 	
 	public void captarMovimientoDer() {
 		log.moverDerecha();
+		JLPuntaje.setText("DERECHA PAPA ");
 	}
 	
 	public void captarOpcionRotar() {
 		log.rotarTetrimino();
+		JLPuntaje.setText("GIRAAAA");
 	}
 	
-	//escalamos en las mismas celdas
+	//actualiza la imagen
 	public void actualizarCelda(int fila, int columna, ImageIcon imagen) {
 		labels[fila][columna].setIcon(imagen);
 	}
 
 	public void gameOver() {
-		//log.gameOver();
-		
+		PPerdiste.setVisible(true);
 	}
 	
 	public void actualizaPuntaje(int puntaje) {
-		// JLPuntaje crearlo y acomodarlo
+		JLPuntaje.setText("Puntaje= "+puntaje);
 	}
 	
 
@@ -120,22 +160,30 @@ public class GUI implements KeyListener {
 	}
 
 
-	public void keyTyped(KeyEvent e) {
-	}
 
+	
+	
+	class EventoDeTeclado implements KeyListener{
+		public void keyTyped(KeyEvent e) {
+			
+		}
 	//se capta cuando se presionan las teclas izq,der,arriba
-	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			captarMovimientoIzq();
-		}else
-			if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				captarMovimientoDer();
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+				captarMovimientoIzq();
 			}else
-				if((e.getKeyCode() == KeyEvent.VK_UP)) {
-					captarOpcionRotar();
-				}
-	}
+				if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					captarMovimientoDer();
+				}else
+					if((e.getKeyCode() == KeyEvent.VK_UP)) {
+						captarOpcionRotar();
+						
+					}
+		}
 
-	public void keyReleased(KeyEvent e) {
+		public void keyReleased(KeyEvent e) {
+			
+		}
 	}
 }
+
