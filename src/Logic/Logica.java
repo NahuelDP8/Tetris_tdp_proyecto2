@@ -20,7 +20,7 @@ public class Logica {
 	public Logica(GUI miGui) {
 
 		this.puntos = 0;
-		this.crearTetrimino();
+		
 
 		imagenes=new ImagenesEscaladas();
 		puntos = 0;
@@ -30,6 +30,7 @@ public class Logica {
 				matrizCeldas [i][j] = new Celda(j,i, false, imagenes.getGrisVacio());  
 			}
 		}
+		this.crearTetrimino();
 		this.miReloj = new Reloj(this); 
 	}
 	
