@@ -1,17 +1,14 @@
 package Logic;
 import entities.*;
 
-import java.awt.Image;
 import java.util.Random;
 import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
 
 import GUI.*;
 
 public class Logica {
 	protected int puntos;
-	protected Celda matrizCeldas[][] = new Celda[21][10] ;
+	protected Celda matrizCeldas[][] = new Celda[25][10] ;
 	protected Tetrimino tetriminoActual;
 	protected GUI miGui;
 	protected Reloj miReloj;
@@ -20,18 +17,19 @@ public class Logica {
 	public Logica(GUI miGui) {
 
 		this.puntos = 0;
-		
+
 
 		imagenes=new ImagenesEscaladas();
 		puntos = 0;
 		this.miGui = miGui;
-		for(int i = 0; i<=20; i++) {
+		for(int i = 0; i<=24; i++) {
 			for(int j  = 0; j<=9; j++) {
 				matrizCeldas [i][j] = new Celda(j,i, false, imagenes.getGrisVacio());  
 			}
 		}
 		this.crearTetrimino();
 		this.miReloj = new Reloj(this); 
+		this.crearTetrimino();
 	}
 	
 	private boolean verificarPerdidaJuego() {
@@ -150,7 +148,7 @@ public class Logica {
 			PairTupla par = futuras.get(i);
 			int x = par.getX();
 			int y = par.getY();
-			if(y>20 || y<0 || x>9 || x<0)
+			if(y>24 || y<0 || x>9 || x<0)
 				valida=false;
 			if(valida) {
 				Celda aux = matrizCeldas[y][x];
