@@ -10,17 +10,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Logic.Logica;
-import entities.Celda;
-import entities.PiezaJ;
-import entities.PiezaL;
-import entities.Tetrimino;
 
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class GUI implements KeyListener {
+public class GUI extends JFrame{
 	
 	private JFrame frame;
 	private Logica log;
@@ -31,6 +27,7 @@ public class GUI implements KeyListener {
 	private JPanel PMatriz;
 	private JPanel PPerdiste;
 	private JLabel JLPerdiste;
+	private EventoDeTeclado tecla=new EventoDeTeclado();
 	
 	/**
 	 * Launch the application.
@@ -54,6 +51,8 @@ public class GUI implements KeyListener {
 	public GUI() {
 		initialize();
 		log = new Logica(this);
+		addKeyListener(tecla);
+		
 	}
 
 	/**
@@ -64,12 +63,14 @@ public class GUI implements KeyListener {
 		frame.setBounds(400,60,400,750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.addKeyListener(tecla);
 		
 		PPerdiste = new JPanel();
 		PPerdiste.setBackground(new Color(0, 0, 0));
 		PPerdiste.setBounds(10, 247, 346, 133);
 		frame.getContentPane().add(PPerdiste);
 		PPerdiste.setLayout(null);
+		PPerdiste.addKeyListener(tecla);
 		
 		
 	
@@ -87,7 +88,7 @@ public class GUI implements KeyListener {
 		PMatriz.setBounds(50, 50, 250, 625);
 		frame.getContentPane().add(PMatriz);
 		PMatriz.setLayout(null);
-		PMatriz.addKeyListener(this);
+		PMatriz.addKeyListener(tecla);
 	
 		
 		PTiempo = new JPanel();
@@ -95,6 +96,7 @@ public class GUI implements KeyListener {
 		PTiempo.setBounds(0, 0, 250, 101);
 		PMatriz.add(PTiempo);
 		PTiempo.setLayout(null);
+		PTiempo.addKeyListener(tecla);
 		
 		
 		JLTiempo = new JLabel("00:00");
@@ -137,6 +139,7 @@ public class GUI implements KeyListener {
 	
 	public void captarOpcionRotar() {
 		log.rotarTetrimino();
+		JLPuntaje.setText("GIRAAAA");
 	}
 	
 	//actualiza la imagen
@@ -158,22 +161,30 @@ public class GUI implements KeyListener {
 	}
 
 
-	public void keyTyped(KeyEvent e) {
-	}
 
+	
+	
+	class EventoDeTeclado implements KeyListener{
+		public void keyTyped(KeyEvent e) {
+			
+		}
 	//se capta cuando se presionan las teclas izq,der,arriba
-	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			captarMovimientoIzq();
-		}else
-			if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				captarMovimientoDer();
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+				captarMovimientoIzq();
 			}else
-				if((e.getKeyCode() == KeyEvent.VK_UP)) {
-					captarOpcionRotar();
-				}
-	}
+				if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					captarMovimientoDer();
+				}else
+					if((e.getKeyCode() == KeyEvent.VK_UP)) {
+						captarOpcionRotar();
+						
+					}
+		}
 
-	public void keyReleased(KeyEvent e) {
+		public void keyReleased(KeyEvent e) {
+			
+		}
 	}
 }
+
