@@ -12,6 +12,6 @@ public class PiezaO extends Tetrimino{
 	}
 
 	public ArrayList<PairTupla> rotar(ArrayList<PairTupla> antiguas) {
-		return null;
+		return new ArrayList<PairTupla>();//devuelve lista vacia.
 	}
 }

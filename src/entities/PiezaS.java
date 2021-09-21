@@ -13,9 +13,12 @@ public class PiezaS extends Tetrimino{
 		this.setImageIcon(imagenes.getVerde());
 	}
 	
+	// Ordena la lista de celdas, para facilitar su manejo:
 	private void ordenar(ArrayList<Celda> lista) {
+		//Mediante metodo burbuja, ordena la lista segun su posicion.
 		Celda temp;
 	    boolean sorted = false;
+	    // Si esta en sentido horizontal ordena segun x:
 	    if (rotacion == 0 || rotacion == 180) {
 		    while (!sorted) {
 		        sorted = true;
@@ -30,6 +33,7 @@ public class PiezaS extends Tetrimino{
 		            }
 		        }
 		    }
+		 // Si esta en sentido vertical ordena segun y:
 	    } else if (rotacion == 90 || rotacion == 270) {
 		    while (!sorted) {
 		        sorted = true;

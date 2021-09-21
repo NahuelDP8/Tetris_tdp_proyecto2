@@ -12,9 +12,13 @@ public class PiezaJ extends Tetrimino{
 		this.setImageIcon(imagenes.getNaranja());
 	}
 	
+	
+	// Ordena la lista de celdas, para facilitar su manejo:
 	private void ordenar(ArrayList<Celda> lista) {
+		//Mediante metodo burbuja, ordena la lista segun su posicion.
 		Celda temp;
 	    boolean sorted = false;
+	    // Si esta en sentido horizontal ordena segun x:
 	    if (rotacion == 0 || rotacion == 180) {
 		    while (!sorted) {
 		        sorted = true;
@@ -29,6 +33,7 @@ public class PiezaJ extends Tetrimino{
 		            }
 		        }
 		    }
+		 // Si esta en sentido vertical ordena segun y:
 	    } else if (rotacion == 90 || rotacion == 270) {
 		    while (!sorted) {
 		        sorted = true;
@@ -49,9 +54,9 @@ public class PiezaJ extends Tetrimino{
 	public ArrayList<PairTupla> rotar(ArrayList<PairTupla> antiguas) {
 		ArrayList<PairTupla> futuras = new ArrayList<PairTupla>();
 		Celda celdaAux;
-		
+		//Ordenamos la lista de celdas que componen al tetrimino:
 		ordenar(listaCeldas);
-		
+		//Rotacion en angulo 0:
 		if(rotacion == 0) {
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
@@ -66,6 +71,7 @@ public class PiezaJ extends Tetrimino{
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()+1));	
 			
 			rotacion = 90;
+		//Rotacion en angulo 90:
 		} else if(rotacion == 90){
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
@@ -80,7 +86,7 @@ public class PiezaJ extends Tetrimino{
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()-1));
 			
 			rotacion = 180;
-			
+			//Rotacion en angulo 180:
 		} else if(rotacion == 180){
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
@@ -95,7 +101,7 @@ public class PiezaJ extends Tetrimino{
 			futuras.add(new PairTupla(celdaAux.getX()-2, celdaAux.getY()));
 
 			rotacion = 270;
-			
+			//Rotacion en angulo 270:
 		} else if(rotacion == 270){
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
@@ -110,7 +116,6 @@ public class PiezaJ extends Tetrimino{
 			futuras.add(new PairTupla(celdaAux.getX()+2, celdaAux.getY()-1));
 			
 			rotacion = 0;
-			
 		}
 			
 		return futuras;
