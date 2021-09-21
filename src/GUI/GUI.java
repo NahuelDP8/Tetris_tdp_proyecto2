@@ -10,6 +10,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Logic.Logica;
+import entities.Celda;
+import entities.PiezaJ;
+import entities.PiezaL;
+import entities.Tetrimino;
+
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
