@@ -53,11 +53,11 @@ public class PiezaI extends Tetrimino{
 		if(rotacion == 0) {
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()+2));
+			futuras.add(new PairTupla(celdaAux.getX()+2, celdaAux.getY()+2));
 			
 			celdaAux = listaCeldas.get(1);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX(), celdaAux.getY()+1));
+			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()-1));
 			
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
@@ -86,7 +86,7 @@ public class PiezaI extends Tetrimino{
 			
 			celdaAux = listaCeldas.get(2);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()));
+			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()-1));
 			
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
@@ -105,7 +105,7 @@ public class PiezaI extends Tetrimino{
 			
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()+2, celdaAux.getY()+1));
+			futuras.add(new PairTupla(celdaAux.getX()+2, celdaAux.getY()-1));
 			
 			rotacion = 0;
 			

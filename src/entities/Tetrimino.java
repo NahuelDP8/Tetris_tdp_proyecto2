@@ -91,14 +91,13 @@ public abstract class Tetrimino {
 					for(int j = 0; j<=x && !encontrado; j++) {
 						PairTupla auxDupla = actuales.get(j);
 						if(auxDupla.getX() == auxPair.getX() && auxDupla.getY() == auxPair.getY()) {
-							encontrado=true;
 							p--;
-							futuras.remove(i);
+							futuras.remove(auxPair);
 							x--;
-							actuales.remove(j);
+							actuales.remove(auxDupla);
+							j--;i--;
 						} 
 					}
-					encontrado=false;
 				}
 	}
 }

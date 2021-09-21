@@ -101,7 +101,7 @@ public class PiezaJ extends Tetrimino{
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()));
 			
-			celdaAux = listaCeldas.get(1);
+			celdaAux = listaCeldas.get(2);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()-1));
 			

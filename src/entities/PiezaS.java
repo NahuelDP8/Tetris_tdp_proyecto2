@@ -81,7 +81,7 @@ public class PiezaS extends Tetrimino{
 			
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()-2));;
+			futuras.add(new PairTupla(celdaAux.getX()-2, celdaAux.getY()));;
 
 			rotacion = 270;
 			

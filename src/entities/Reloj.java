@@ -13,7 +13,7 @@ public class Reloj implements Runnable {
 		miLogica = logic;
 		minutos = 0;
 		segundos = 0;
-		pausa = 400;
+		pausa = 500;
 		//Hilo que actualiza el reloj.
 		hiloTiempo = new Thread(this);
 		hiloTiempo.start();
