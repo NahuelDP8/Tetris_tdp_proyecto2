@@ -26,8 +26,8 @@ public class Logica {
 				matrizCeldas [i][j] = new Celda(j,i, false, imagenes.getGrisVacio());  
 			}
 		}
-		this.miReloj = new Reloj(this); 
 		this.crearTetrimino();
+		this.miReloj = new Reloj(this); 
 	}
 	
 	private boolean verificarPerdidaJuego() {
@@ -49,16 +49,17 @@ public class Logica {
 			int max = 7;
 			Random random = new Random();
 			//Nos devuelve un número aleatorio del 1 al 7
-			int valor = random.nextInt(max + min) + min;	
+			int valor = random.nextInt(max - min) + min;	
 			switch (valor) {
-				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[2][4], matrizCeldas[2][5], matrizCeldas[2][6]);
-				case 2:  tetriminoActual = new PiezaJ(0,matrizCeldas[1][3], matrizCeldas[2][3], matrizCeldas[2][4], matrizCeldas[2][5]);
-				case 3:  tetriminoActual = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]);
-				case 4:  tetriminoActual = new PiezaO(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][4], matrizCeldas[2][5]);
-				case 5:  tetriminoActual = new PiezaZ(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][5], matrizCeldas[2][6]);
-				case 6:  tetriminoActual = new PiezaT(0,matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[1][3], matrizCeldas[1][5]);
-				case 7:  tetriminoActual = new PiezaS(0,matrizCeldas[1][5], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[2][3]);
+				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]); break;
+				case 2:  tetriminoActual = new PiezaJ(0,matrizCeldas[1][3], matrizCeldas[2][3], matrizCeldas[2][4], matrizCeldas[2][5]); break;
+				case 3:  tetriminoActual = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]); break;
+				case 4:  tetriminoActual = new PiezaO(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][4], matrizCeldas[2][5]); break;
+				case 5:  tetriminoActual = new PiezaZ(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][5], matrizCeldas[2][6]); break;
+				case 6:  tetriminoActual = new PiezaT(0,matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[1][3], matrizCeldas[1][5]); break;
+				case 7:  tetriminoActual = new PiezaS(0,matrizCeldas[1][5], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[2][3]); break;
 			}
+			System.out.print(valor);
 		}	
 	} 
 	
@@ -124,6 +125,8 @@ public class Logica {
 			if(lineasCompletas!=0) {
 				this.sumarPuntaje(lineasCompletas);
 			}
+			System.out.println(verificado);
+			crearTetrimino();
 		}
 	}
 	
@@ -137,6 +140,7 @@ public class Logica {
 		}else {
 			puntos = puntos + 800;
 		}
+		
 	}
 
 	private boolean verificarPosicionesFuturas(ArrayList<PairTupla> futuras) {

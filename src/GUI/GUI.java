@@ -10,13 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Logic.Logica;
-import entities.Celda;
-import entities.PiezaJ;
-import entities.PiezaL;
-import entities.Tetrimino;
 
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import java.awt.Color;
 
 public class GUI implements KeyListener {
@@ -68,7 +63,7 @@ public class GUI implements KeyListener {
 		
 		JPanel PTiempo = new JPanel();
 		PTiempo.setBackground(Color.RED);
-		PTiempo.setBounds(0, 0, 250, 101);
+		PTiempo.setBounds(0, 0, 250, 0);
 		panelMatriz.add(PTiempo);
 		PTiempo.setLayout(null);
 		
