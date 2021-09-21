@@ -6,19 +6,21 @@ import javax.swing.ImageIcon;
 
 public abstract class Tetrimino {
 	//Atributos de clase
-	protected ImageIcon pathPhoto; 
+	protected ImageIcon Photo; 
 	protected int rotacion; 
 	protected ArrayList<Celda> listaCeldas;
 	//Constructor
-	public Tetrimino(int rotacion, ImageIcon pathPhoto, Celda c1, Celda c2, Celda c3, Celda c4)  {
+	public Tetrimino(int rotacion, ImageIcon Photo, Celda c1, Celda c2, Celda c3, Celda c4)  {
 		this.rotacion = rotacion;
-		this.pathPhoto = pathPhoto;
+		this.Photo = Photo;
 		listaCeldas.add(c1);
 		listaCeldas.add(c2);
 		listaCeldas.add(c3);
 		listaCeldas.add(c4);
 	}
-	
+	protected void setImageIcon(ImageIcon P){
+		Photo=P;
+	}
 
 	abstract public ArrayList<PairTupla> rotar(ArrayList<PairTupla> antiguas); 
 	
@@ -27,8 +29,8 @@ public abstract class Tetrimino {
 		return listaCeldas;
 	}
 	
-	public ImageIcon getPathPhoto() {
-		return pathPhoto;
+	public ImageIcon getPhoto() {
+		return Photo;
 	}
 	public void setCeldas(int i, Celda reemplazo) {
 		listaCeldas.set(i, reemplazo);

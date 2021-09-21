@@ -15,18 +15,19 @@ public class Logica {
 	protected Tetrimino tetriminoActual;
 	protected GUI miGui;
 	protected Reloj miReloj;
-	
-	private static ImageIcon celdaDesocupadaImgSinEscalar =new ImageIcon(Logica.class.getResource("/imagenes/grisVacio.png"));
-	private static Image EscalarFoto = celdaDesocupadaImgSinEscalar.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
-	private static ImageIcon celdaDesocupadaImg = new ImageIcon(EscalarFoto);
+	protected ImagenesEscaladas imagenes;
 	
 	public Logica(GUI miGui) {
+
 		this.puntos = 0;
 		this.crearTetrimino();
+
+		imagenes=new ImagenesEscaladas();
+		puntos = 0;
 		this.miGui = miGui;
 		for(int i = 0; i<=20; i++) {
 			for(int j  = 0; j<=9; j++) {
-				matrizCeldas [i][j] = new Celda(j,i, false, celdaDesocupadaImg);  
+				matrizCeldas [i][j] = new Celda(j,i, false, imagenes.getGrisVacio());  
 			}
 		}
 		this.miReloj = new Reloj(this); 
@@ -173,10 +174,10 @@ public class Logica {
 				Celda cActual  = celT.get(j);
 				if(cActual == cDesocupar) {
 					encontrado = true;
-					cActual.actualizarImagen(celdaDesocupadaImg);
+					cActual.actualizarImagen(imagenes.getGrisVacio());
 					this.actualizarCelda(cActual);
 					celT.set(j, cOcupar);
-					cOcupar.actualizarImagen(tetriminoActual.getPathPhoto());
+					cOcupar.actualizarImagen(tetriminoActual.getPhoto());
 					cOcupar.setOcupado(true);
 					this.actualizarCelda(cOcupar);
 				}
@@ -242,7 +243,7 @@ public class Logica {
 	private void liberarLinea(int i) {
 		for(int j = 0; j<=9; j++) {
 			Celda aux = matrizCeldas[i][j];
-			aux.actualizarImagen(celdaDesocupadaImg);
+			aux.actualizarImagen(imagenes.getGrisVacio());
 			aux.setOcupado(false);
 			this.actualizarCelda(aux);
 		}
