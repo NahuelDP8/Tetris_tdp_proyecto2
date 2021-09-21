@@ -117,7 +117,7 @@ public class GUI implements KeyListener {
 		JLTiempo.setText(min+":"+seg);
 	}
 
-	
+
 	public void keyTyped(KeyEvent e) {
 	}
 

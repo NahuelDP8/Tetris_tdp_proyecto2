@@ -37,6 +37,7 @@ public class Logica {
 			case 3: 
 		}
 	} */
+	
 	public void rotarTetrimino() {
 		boolean verificado = false;	
 		//Creamos una lista de aquellas posiciones NUEVAS que pasarían a ser ocupadas por el tetrimino actual
@@ -48,6 +49,7 @@ public class Logica {
 			realizarMovimientos(ocupar, desocupar);
 		}
 	}
+	
 	public void moverDerecha() {
 		boolean verificado = false;
 		//Creamos una lista de aquellas posiciones NUEVAS que pasarían a ser ocupadas por el tetrimino actual
@@ -74,6 +76,7 @@ public class Logica {
 			realizarMovimientos(ocupar, desocupar);
 		}
 	}
+	
 	public void moverAbajo() {
 		boolean verificado = false;
 		
@@ -86,10 +89,25 @@ public class Logica {
 		if(verificado) {
 			realizarMovimientos(ocupar, desocupar);
 		} else{
-			
+			int lineasCompletas = this.buscarLineasCompletas();
+			if(lineasCompletas!=0) {
+				this.sumarPuntaje(lineasCompletas);
+			}
 		}
 	}
 	
+	private void sumarPuntaje(int lineasCompletas) {
+		if(lineasCompletas == 1) {
+			puntos = puntos + 100;
+		}else if(lineasCompletas ==2) {
+			puntos = puntos + 200;
+		}else if(lineasCompletas == 3) {
+			puntos = puntos + 500;
+		}else {
+			puntos = puntos + 800;
+		}
+	}
+
 	private boolean verificarPosicionesFuturas(ArrayList<PairTupla> futuras) {
 		boolean valida = true;
 		int size = futuras.size();
@@ -138,9 +156,9 @@ public class Logica {
 		miGui.actualizarCelda(celda.getY(), celda.getX(), celda.getImagen());
 	}
 	
-	private void buscarLineasCompletas() {
+	private int buscarLineasCompletas() {
+		int cantLineasCompletas = 0; 
 		boolean hayUnaVacia = false;
-		
 		for(int i =0; i < 21 ; i++ ) {
 			if(matrizCeldas[i][0].getOcupado()==true) { 
 				for( int j = 1; j < 10 && !hayUnaVacia;j++ ) {
@@ -148,24 +166,53 @@ public class Logica {
 						hayUnaVacia=true;
 					//significa que ya llegamos al final de la fila y vemos que toda está completa 
 					if(j==9) {
-						//this.modificarMatrizLineaLlena(i);
+						this.modificarMatrizLineaLlena(i);
+						cantLineasCompletas++;
 					}
 				}
 			}
 			hayUnaVacia=false;
-		}		
-	
+		}
+		return cantLineasCompletas;
 	}
 
 	public void actualizarReloj() {
-		// TODO Auto-generated method stub
-		
+		this.miGui.actualizarReloj(miReloj.getMinutos(), miReloj.getSegundos());
 	}
 	
-	/*private void modificarMatrizLineaLlena(int y) {
-		for(int i =y; i>=0; y--) {
-			for(int j =0; j<)
+	private void modificarMatrizLineaLlena(int y) {
+		boolean detener = false;
+		//contador de celdas no ocupadas
+		int celdasNoOcupadas = 0;
+		for(int i =y; i>=0 && detener; y--) {
+			//caso excepcional en el que queremos setear lo que está en la fila de arriba con respecto al comienzo de la matriz
+			if(i == 0) {
+				this.liberarLinea(0);
+			}
+			for(int j =0; j<=9;j++) {
+				Celda arriba = matrizCeldas[i-1][j];
+				Celda actual = matrizCeldas[i][j];
+				actual.setOcupado(arriba.getOcupado());
+				actual.actualizarImagen(arriba.getImagen());
+				this.actualizarCelda(actual);
+				if(actual.getOcupado()==false) {
+					celdasNoOcupadas++;
+				}
+			}
+			//En caso de que la última fila que hayamos modificado represente una linea vacía, entonces no necesitamos seguir recorriendo la matriz.
+			//lo que restan son todas celdas no ocupadas
+			if(celdasNoOcupadas ==10)
+				detener =true;
 		}
-	}*/
+	}
+
+	private void liberarLinea(int i) {
+		for(int j = 0; j<=9; j++) {
+			Celda aux = matrizCeldas[i][j];
+			aux.actualizarImagen("Fotito de celda no ocupada");;
+			aux.setOcupado(false);
+			this.actualizarCelda(aux);
+		}
+	}
 	
 }
