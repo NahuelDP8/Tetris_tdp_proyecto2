@@ -13,7 +13,7 @@ public class Reloj implements Runnable {
 		miLogica = logic;
 		minutos = 0;
 		segundos = 0;
-		pausa = 500;
+		pausa = 250;
 		//Hilo que actualiza el reloj.
 		hiloTiempo = new Thread(this);
 		hiloTiempo.start();
@@ -39,14 +39,18 @@ public class Reloj implements Runnable {
 					pausa -= 50;
 					
 				miLogica.actualizarReloj();
-			} catch(InterruptedException e) {}
+			} catch(InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
 		}
 		//Baja el tetrimino 
 		while (ct == hiloBajar) {
 			try {
 				Thread.sleep(pausa);
 				miLogica.moverAbajo();
-			} catch(InterruptedException e) {}
+			} catch(InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
 		}
 		
 	}
@@ -58,8 +62,8 @@ public class Reloj implements Runnable {
 		return segundos;
 	}
 	public void gameOver() {
-		hiloBajar.stop();
-		hiloTiempo.stop();
+		hiloTiempo.interrupt();
+		hiloBajar.interrupt();
 	}
 
 }

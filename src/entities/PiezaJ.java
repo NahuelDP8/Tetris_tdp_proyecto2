@@ -69,8 +69,6 @@ public class PiezaJ extends Tetrimino{
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()+1));	
-			
-			rotacion = 90;
 		//Rotacion en angulo 90:
 		} else if(rotacion == 90){
 			celdaAux = listaCeldas.get(0);
@@ -84,8 +82,6 @@ public class PiezaJ extends Tetrimino{
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()-1));
-			
-			rotacion = 180;
 			//Rotacion en angulo 180:
 		} else if(rotacion == 180){
 			celdaAux = listaCeldas.get(0);
@@ -99,8 +95,6 @@ public class PiezaJ extends Tetrimino{
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-2, celdaAux.getY()));
-
-			rotacion = 270;
 			//Rotacion en angulo 270:
 		} else if(rotacion == 270){
 			celdaAux = listaCeldas.get(0);
@@ -114,8 +108,6 @@ public class PiezaJ extends Tetrimino{
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()+2, celdaAux.getY()-1));
-			
-			rotacion = 0;
 		}
 			
 		return futuras;

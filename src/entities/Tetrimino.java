@@ -37,6 +37,14 @@ public abstract class Tetrimino {
 		listaCeldas.set(i, reemplazo);
 	}
 	
+	public void setRotacion(int rot) {
+		rotacion = rot;
+	}
+	
+	public int getRotacion() {
+		return rotacion;
+	}
+	
 	public ArrayList<PairTupla> moverDerecha(ArrayList<PairTupla> futuras) {
 		//Esto se puede optimizar probablemente
 		ArrayList<PairTupla> retorno = new ArrayList<PairTupla>();

@@ -59,26 +59,20 @@ public class PiezaT extends Tetrimino{
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()+1));
-					
-			rotacion = 90;
 		} else if(rotacion == 90){
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()+1));
-			rotacion = 180;
 			
 		} else if(rotacion == 180){
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()-1));
-			rotacion = 270;
 			
 		} else if(rotacion == 270){
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
-			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()-1));
-			
-			rotacion = 0;
+			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()-1));;
 			
 		}
 			

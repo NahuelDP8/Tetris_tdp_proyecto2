@@ -67,8 +67,7 @@ public class PiezaL extends Tetrimino{
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX(), celdaAux.getY()+2));	
-			
-			rotacion = 90;
+
 		} else if(rotacion == 90){
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
@@ -82,8 +81,6 @@ public class PiezaL extends Tetrimino{
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX(), celdaAux.getY()-1));
 			
-			rotacion = 180;
-			
 		} else if(rotacion == 180){
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
@@ -96,8 +93,6 @@ public class PiezaL extends Tetrimino{
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-2, celdaAux.getY()-1));
-
-			rotacion = 270;
 			
 		} else if(rotacion == 270){
 			celdaAux = listaCeldas.get(0);
@@ -111,8 +106,6 @@ public class PiezaL extends Tetrimino{
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()+1, celdaAux.getY()-2));
-			
-			rotacion = 0;
 			
 		}
 			

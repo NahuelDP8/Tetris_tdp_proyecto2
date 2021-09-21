@@ -27,6 +27,7 @@ public class GUI{
 	private JPanel PMatriz;
 	private JPanel PPerdiste;
 	private JLabel JLPerdiste;
+	private boolean jugando;
 	
 	
 	/**
@@ -72,7 +73,7 @@ public class GUI{
 		frame.getContentPane().add(PPerdiste);
 		PPerdiste.setLayout(null);
 		
-		
+		jugando = true;
 	
 		JLPerdiste = new JLabel("Lo siento has sido derrotado");
 		JLPerdiste.setForeground(new Color(0, 128, 0));
@@ -146,6 +147,7 @@ public class GUI{
 
 	public void gameOver() {
 		PPerdiste.setVisible(true);
+		jugando = false;
 	}
 	
 	public void actualizaPuntaje(int puntaje) {
@@ -167,16 +169,18 @@ public class GUI{
 		}
 	//se capta cuando se presionan las teclas izq,der,arriba
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-				captarMovimientoIzq();
-			}else
-				if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-					captarMovimientoDer();
+			if(jugando) {
+				if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+					captarMovimientoIzq();
 				}else
-					if((e.getKeyCode() == KeyEvent.VK_UP)) {
-						captarOpcionRotar();
-						
-					}
+					if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+						captarMovimientoDer();
+					}else
+						if((e.getKeyCode() == KeyEvent.VK_UP)) {
+							captarOpcionRotar();
+							
+						}
+			}
 		}
 
 		public void keyReleased(KeyEvent e) {
