@@ -53,7 +53,7 @@ public class Logica {
 			//Nos devuelve un número aleatorio del 1 al 7
 			int valor = random.nextInt(max + min) + min;	
 			switch (valor) {
-				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[2][4], matrizCeldas[2][5], matrizCeldas[2][6]);
+				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]);
 				case 2:  tetriminoActual = new PiezaJ(0,matrizCeldas[1][3], matrizCeldas[2][3], matrizCeldas[2][4], matrizCeldas[2][5]);
 				case 3:  tetriminoActual = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]);
 				case 4:  tetriminoActual = new PiezaO(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][4], matrizCeldas[2][5]);

@@ -6,14 +6,14 @@ import javax.swing.ImageIcon;
 
 	
 public class ImagenesEscaladas {
-	private ImageIcon EscaladaAmarillo=new ImageIcon(ImagenesEscaladas.class.getResource("/imagenes/amarillo.png"));
-	private ImageIcon EscaladaAzul=new ImageIcon(ImagenesEscaladas.class.getResource("/imagenes/azul.png"));
-	private ImageIcon EscaladaCeleste=new ImageIcon(ImagenesEscaladas.class.getResource("/imagenes/celeste.png"));
-	private ImageIcon EscaladaGrisVacio= new ImageIcon(ImagenesEscaladas.class.getResource("/imagenes/grisVacio.png"));
-	private ImageIcon EscaladaNaranja=new ImageIcon(ImagenesEscaladas.class.getResource("/imagenes/naranja.png"));
-	private ImageIcon EscaladaRojo=new ImageIcon(ImagenesEscaladas.class.getResource("/imagenes/rojo.png"));
-	private ImageIcon EscaladaVerde=new ImageIcon(ImagenesEscaladas.class.getResource("/imagenes/verde.png"));
-	private ImageIcon EscaladaVioleta=new ImageIcon(ImagenesEscaladas.class.getResource("/imagenes/violeta.png"));
+	private ImageIcon EscaladaAmarillo=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/amarillo.png"));
+	private ImageIcon EscaladaAzul=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/azul.png"));
+	private ImageIcon EscaladaCeleste=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/celeste.png"));
+	private ImageIcon EscaladaGrisVacio= new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/grisVacio.png"));
+	private ImageIcon EscaladaNaranja=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/naranja.png"));
+	private ImageIcon EscaladaRojo=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/rojo.png"));
+	private ImageIcon EscaladaVerde=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/verde.png"));
+	private ImageIcon EscaladaVioleta=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/violeta.png"));
 	private final static int x=25;
 	private final static int y=25;
 	
