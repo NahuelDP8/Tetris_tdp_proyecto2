@@ -2,7 +2,7 @@ package Logic;
 import entities.*;
 
 import java.awt.Image;
-//import java.util.Random;
+import java.util.Random;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -21,30 +21,56 @@ public class Logica {
 	private static ImageIcon celdaDesocupadaImg = new ImageIcon(EscalarFoto);
 	
 	public Logica(GUI miGui) {
-		puntos = 0;
-		//this.crearTetrimino();
+		this.puntos = 0;
+		this.crearTetrimino();
 		this.miGui = miGui;
 		for(int i = 0; i<=20; i++) {
 			for(int j  = 0; j<=9; j++) {
 				matrizCeldas [i][j] = new Celda(j,i, false, celdaDesocupadaImg);  
 			}
 		}
+		this.miReloj = new Reloj(this); 
 	}
 	
-	/*private void crearTetrimino() { 
-		int min = 1;
-		int max = 7;
-		Random random = new Random();
-		//Nos devuelve un número aleatorio del 1 al 7
-		int valor = random.nextInt(max + min) + min;
-		
-		switch (valor) {
-			case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[3][0], matrizCeldas[4][0], matrizCeldas[5][0], matrizCeldas[6][0]);
-			case 2:  tetriminoActual = new PiezaJ(0,matrizCeldas[0][4], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[3][4]);
-			case 3: 
+	private boolean verificarPerdidaJuego() {
+		boolean hayDerrota = false;
+		for(int j =0 ; j<=9 && !hayDerrota; j++) {
+			if(matrizCeldas[3][j].getOcupado() == true)
+				hayDerrota=true;
 		}
-	} */
+		return hayDerrota;
+	}
 	
+	private void crearTetrimino() { 
+		//Antes de crear un tetrimino debemos verificar que no hayamos perdido 
+		boolean perdimos = this.verificarPerdidaJuego();
+		if(perdimos) {
+			this.gameOver();
+		}else { 
+			int min = 1;
+			int max = 7;
+			Random random = new Random();
+			//Nos devuelve un número aleatorio del 1 al 7
+			int valor = random.nextInt(max + min) + min;	
+			switch (valor) {
+				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[2][4], matrizCeldas[2][5], matrizCeldas[2][6]);
+				case 2:  tetriminoActual = new PiezaJ(0,matrizCeldas[1][3], matrizCeldas[2][3], matrizCeldas[2][4], matrizCeldas[2][5]);
+				case 3:  tetriminoActual = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]);
+				case 4:  tetriminoActual = new PiezaO(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][4], matrizCeldas[2][5]);
+				case 5:  tetriminoActual = new PiezaZ(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][5], matrizCeldas[2][6]);
+				case 6:  tetriminoActual = new PiezaT(0,matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[1][3], matrizCeldas[1][5]);
+				case 7:  tetriminoActual = new PiezaS(0,matrizCeldas[1][5], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[2][3]);
+			}
+		}	
+	} 
+	
+	private void gameOver() {
+		//Debemos para el reloj y el corrimiento automático hacia abajo del tetrimino actual. 
+		this.miReloj.gameOver();
+		//Debemos avisarle a la gui que terminó el juego. 
+		this.miGui.gameOver();
+	}
+
 	public void rotarTetrimino() {
 		boolean verificado = false;	
 		//Creamos una lista de aquellas posiciones NUEVAS que pasarían a ser ocupadas por el tetrimino actual
@@ -125,7 +151,7 @@ public class Logica {
 			if(y>20 || y<0 || x>9 || x<0)
 				valida=false;
 			if(valida) {
-				Celda aux = matrizCeldas[par.getX()][par.getY()];
+				Celda aux = matrizCeldas[y][x];
 				if(aux.getOcupado() == true)
 					valida=false;
 			}

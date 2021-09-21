@@ -57,5 +57,9 @@ public class Reloj implements Runnable {
 	public int getSegundos() {
 		return segundos;
 	}
+	public void gameOver() {
+		hiloBajar.stop();
+		hiloTiempo.stop();
+	}
 
 }
