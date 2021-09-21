@@ -96,6 +96,8 @@ public abstract class Tetrimino {
 							futuras.remove(i);
 							x--;
 							actuales.remove(j);
+							i--;
+							j--;
 						} 
 					}
 					encontrado=false;
