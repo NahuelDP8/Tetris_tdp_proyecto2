@@ -1,10 +1,12 @@
 package entities;
 
+import javax.swing.ImageIcon;
+
 public class Celda {
 	private boolean estaOcupado;
 	private int x,y;
-	private String imagen;
-	public Celda(int x, int y, boolean ocupado, String img){
+	private ImageIcon imagen;
+	public Celda(int x, int y, boolean ocupado, ImageIcon img){
 		this.x = x;
 		this.y = y;
 		estaOcupado = ocupado;
@@ -23,10 +25,10 @@ public class Celda {
 	public int getY() {
 		return y;
 	}
-	public void actualizarImagen(String img) {
+	public void actualizarImagen(ImageIcon img) {
 		imagen = img;
 	}
-	public String getImagen(){
+	public ImageIcon getImagen(){
 		return imagen;
 	}
 }

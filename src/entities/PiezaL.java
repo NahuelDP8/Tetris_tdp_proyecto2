@@ -1,11 +1,18 @@
 package entities;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
+
 public class PiezaL extends Tetrimino{
-	private static final String path = "pathDeLafotitoL";
+
+	private static ImageIcon miFoto =new ImageIcon(PiezaL.class.getResource("/imagenes/rojo.png"));
+	private static Image EscalarFoto = miFoto.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
+	private static ImageIcon miFotoEscalada = new ImageIcon(EscalarFoto);
 	public PiezaL(int rotacion, Celda c1, Celda c2, Celda c3, Celda c4) {
-		super(rotacion, path,c1,c2,c3,c4);
+		super(rotacion, miFotoEscalada,c1,c2,c3,c4);
 	}
 	
 	private void ordenar(ArrayList<Celda> lista) {

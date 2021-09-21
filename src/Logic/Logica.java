@@ -1,8 +1,11 @@
 package Logic;
 import entities.*;
 
+import java.awt.Image;
 //import java.util.Random;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 import GUI.*;
 
@@ -13,13 +16,17 @@ public class Logica {
 	protected GUI miGui;
 	protected Reloj miReloj;
 	
+	private static ImageIcon celdaDesocupadaImgSinEscalar =new ImageIcon(Logica.class.getResource("/imagenes/grisVacio.png"));
+	private static Image EscalarFoto = celdaDesocupadaImgSinEscalar.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
+	private static ImageIcon celdaDesocupadaImg = new ImageIcon(EscalarFoto);
+	
 	public Logica(GUI miGui) {
 		puntos = 0;
 		//this.crearTetrimino();
 		this.miGui = miGui;
 		for(int i = 0; i<=20; i++) {
 			for(int j  = 0; j<=9; j++) {
-				matrizCeldas [i][j] = new Celda(j,i, false, "Foto de celda ocupada");  
+				matrizCeldas [i][j] = new Celda(j,i, false, celdaDesocupadaImg);  
 			}
 		}
 	}
@@ -140,7 +147,7 @@ public class Logica {
 				Celda cActual  = celT.get(j);
 				if(cActual == cDesocupar) {
 					encontrado = true;
-					cActual.actualizarImagen("Imagen de celda desocupada");
+					cActual.actualizarImagen(celdaDesocupadaImg);
 					this.actualizarCelda(cActual);
 					celT.set(j, cOcupar);
 					cOcupar.actualizarImagen(tetriminoActual.getPathPhoto());
@@ -209,7 +216,7 @@ public class Logica {
 	private void liberarLinea(int i) {
 		for(int j = 0; j<=9; j++) {
 			Celda aux = matrizCeldas[i][j];
-			aux.actualizarImagen("Fotito de celda no ocupada");;
+			aux.actualizarImagen(celdaDesocupadaImg);
 			aux.setOcupado(false);
 			this.actualizarCelda(aux);
 		}

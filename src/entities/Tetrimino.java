@@ -2,13 +2,15 @@ package entities;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public abstract class Tetrimino {
 	//Atributos de clase
-	protected String pathPhoto; 
+	protected ImageIcon pathPhoto; 
 	protected int rotacion; 
 	protected ArrayList<Celda> listaCeldas;
 	//Constructor
-	public Tetrimino(int rotacion, String pathPhoto, Celda c1, Celda c2, Celda c3, Celda c4)  {
+	public Tetrimino(int rotacion, ImageIcon pathPhoto, Celda c1, Celda c2, Celda c3, Celda c4)  {
 		this.rotacion = rotacion;
 		this.pathPhoto = pathPhoto;
 		listaCeldas.add(c1);
@@ -25,7 +27,7 @@ public abstract class Tetrimino {
 		return listaCeldas;
 	}
 	
-	public String getPathPhoto() {
+	public ImageIcon getPathPhoto() {
 		return pathPhoto;
 	}
 	public void setCeldas(int i, Celda reemplazo) {
