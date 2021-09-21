@@ -21,28 +21,28 @@ public class ImagenesEscaladas {
 		Image EscalandoFoto=null;
 		//escalado de Amarillo
 		EscalandoFoto = EscaladaAmarillo.getImage().getScaledInstance(x,y, Image.SCALE_SMOOTH);
-		ImageIcon EscaladaAmarillo = new ImageIcon(EscalandoFoto);
+		EscaladaAmarillo = new ImageIcon(EscalandoFoto);
 		//escalado de Azul
 		EscalandoFoto = EscaladaAzul.getImage().getScaledInstance(x,y, Image.SCALE_SMOOTH);
-		ImageIcon EscaladaAzul = new ImageIcon(EscalandoFoto);
+		EscaladaAzul = new ImageIcon(EscalandoFoto);
 		//escalado de Celeste
 		EscalandoFoto = EscaladaCeleste.getImage().getScaledInstance(x,y, Image.SCALE_SMOOTH);
-		ImageIcon EscaladaCeleste = new ImageIcon(EscalandoFoto);
+		EscaladaCeleste = new ImageIcon(EscalandoFoto);
 		//escalado de grisVacio
 		EscalandoFoto = EscaladaGrisVacio.getImage().getScaledInstance(x,y, Image.SCALE_SMOOTH);
-		ImageIcon EscaladaGrisVacio= new ImageIcon(EscalandoFoto);
+		EscaladaGrisVacio= new ImageIcon(EscalandoFoto);
 		//escalado de naranja
 		EscalandoFoto = EscaladaNaranja.getImage().getScaledInstance(x,y, Image.SCALE_SMOOTH);
-		ImageIcon EscaladaNaranja = new ImageIcon(EscalandoFoto);
+		EscaladaNaranja = new ImageIcon(EscalandoFoto);
 		//escalado de rojo
 		EscalandoFoto = EscaladaRojo.getImage().getScaledInstance(x,y, Image.SCALE_SMOOTH);
-		ImageIcon EscaladaRojo = new ImageIcon(EscalandoFoto);
+		EscaladaRojo = new ImageIcon(EscalandoFoto);
 		//escalado de verde
 		EscalandoFoto = EscaladaVerde.getImage().getScaledInstance(x,y, Image.SCALE_SMOOTH);
-		ImageIcon EscaladaVerde = new ImageIcon(EscalandoFoto);
+		EscaladaVerde = new ImageIcon(EscalandoFoto);
 		//escalado de violeta
 		EscalandoFoto = EscaladaVioleta.getImage().getScaledInstance(x,y, Image.SCALE_SMOOTH);
-		ImageIcon EscaladaVioleta = new ImageIcon(EscalandoFoto);
+		EscaladaVioleta = new ImageIcon(EscalandoFoto);
 	}
 	
 
