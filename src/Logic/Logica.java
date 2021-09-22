@@ -52,8 +52,7 @@ public class Logica {
 			int max = 7;
 			Random random = new Random();
 			//Nos devuelve un número aleatorio del 1 al 7
-			//int valor = random.nextInt(max - min) + min;
-			int valor = 2;
+			int valor = random.nextInt(max - min) + min;
 			switch (valor) {
 
 				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]); break;
@@ -73,7 +72,7 @@ public class Logica {
 		miReloj.gameOver();
 		//Debemos avisarle a la gui que terminó el juego. 
 	}
-
+	
 	public void rotarTetrimino() {
 		boolean verificado = false;	
 		int rotacion;
