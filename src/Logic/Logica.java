@@ -38,6 +38,7 @@ public class Logica {
 		tetriminoActual=this.crearTetrimino(NumRandom());
 		
 		tetriminoSiguiente=this.crearTetrimino(NumRandom());
+		miGui.actualizarTetriminoSiguiente(tetriminoSiguiente.getMiImagen());
 		this.miReloj = new Reloj(this); 
 	}
 	
@@ -53,7 +54,7 @@ public class Logica {
 	
 	private int NumRandom() {
 		int min = 1;
-		int max = 7;
+		int max = 8;
 		Random random = new Random();
 		//Nos devuelve un número aleatorio del 1 al 7
 		int valor = random.nextInt(max - min) + min;

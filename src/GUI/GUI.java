@@ -61,6 +61,7 @@ public class GUI{
 		//Listener Eventos
 		EventoDeTeclado tecla=new EventoDeTeclado();
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(0, 0, 0));
 		frame.setBounds(400,60,400,750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(tecla);
@@ -70,6 +71,7 @@ public class GUI{
 	
 		//Panel donde se crea la matriz
 		PMatriz = new JPanel();
+		PMatriz.setBackground(new Color(0, 0, 0));
 		PMatriz.setBounds(20, 25, 356, 678);
 		frame.getContentPane().add(PMatriz);
 		PMatriz.setLayout(null);
