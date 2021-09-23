@@ -19,6 +19,7 @@ public class Logica {
 	protected Reloj miReloj;
 	protected ImagenesEscaladas imagenes;
 	protected Tetrimino tetriminoSiguiente;
+	protected boolean perdiste=false;
 	
 	public Logica(GUI miGui) {
 
@@ -35,6 +36,7 @@ public class Logica {
 		}
 
 		tetriminoActual=this.crearTetrimino(NumRandom());
+		
 		tetriminoSiguiente=this.crearTetrimino(NumRandom());
 		this.miReloj = new Reloj(this); 
 	}
@@ -82,6 +84,7 @@ public class Logica {
 	} 
 	
 	private void gameOver() {
+		perdiste=true;
 		miGui.gameOver();
 		//Debemos para el reloj y el corrimiento automático hacia abajo del tetrimino actual. 
 		miReloj.gameOver();
@@ -177,7 +180,9 @@ public class Logica {
 				this.miGui.actualizaPuntaje(this.puntos);			}
 			tetriminoActual=tetriminoSiguiente;
 			tetriminoSiguiente=crearTetrimino(NumRandom());
+			if(!perdiste) {
 			miGui.actualizarTetriminoSiguiente(tetriminoSiguiente.getMiImagen());
+			}
 		}
 	}
 	

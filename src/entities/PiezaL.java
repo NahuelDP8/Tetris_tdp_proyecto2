@@ -9,7 +9,9 @@ public class PiezaL extends Tetrimino{
 	public PiezaL(int rotacion, Celda c1, Celda c2, Celda c3, Celda c4) {
 		super(rotacion, null,c1,c2,c3,c4);
 		ImagenesEscaladas imagenes=new ImagenesEscaladas();
-		this.setImageIcon(imagenes.getAzul());
+		this.setImageIcon(imagenes.getNaranja());
+		MiImagen=imagenes.getLNaranja();
+		
 	}
 	// Ordena la lista de celdas, para facilitar su manejo:
 	private void ordenar(ArrayList<Celda> lista) {

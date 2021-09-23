@@ -10,6 +10,7 @@ public class PiezaT extends Tetrimino{
 		super(rotacion, null,c1,c2,c3,c4);
 		ImagenesEscaladas imagenes=new ImagenesEscaladas();
 		this.setImageIcon(imagenes.getVioleta());
+		MiImagen=imagenes.getTVioleta();
 	}
 	// Ordena la lista de celdas, para facilitar su manejo:
 	private void ordenar(ArrayList<Celda> lista) {

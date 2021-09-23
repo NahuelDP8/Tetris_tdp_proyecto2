@@ -11,6 +11,7 @@ public class PiezaS extends Tetrimino{
 		super(rotacion, null,c1,c2,c3,c4);
 		ImagenesEscaladas imagenes=new ImagenesEscaladas();
 		this.setImageIcon(imagenes.getVerde());
+		MiImagen=imagenes.getSVerde();
 	}
 	
 	// Ordena la lista de celdas, para facilitar su manejo:

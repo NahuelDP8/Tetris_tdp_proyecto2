@@ -12,7 +12,7 @@ public class PiezaI extends Tetrimino{
 		super(rotacion, null,c1,c2,c3,c4);
 		ImagenesEscaladas imagenes=new ImagenesEscaladas();
 		this.setImageIcon(imagenes.getCeleste());
-		this.setMiImagen(imagenes.getICeleste());
+		MiImagen=imagenes.getICeleste();
 	}
 	// Ordena la lista de celdas, para facilitar su manejo:
 	private void ordenar(ArrayList<Celda> lista) {

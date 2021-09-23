@@ -10,20 +10,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Logic.Logica;
-import entities.ImagenesEscaladas;
-import entities.PiezaI;
-import entities.PiezaJ;
-import entities.PiezaL;
-import entities.PiezaO;
-import entities.PiezaS;
-import entities.PiezaT;
-import entities.PiezaZ;
 
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.JTextField;
 
 public class GUI{
 	
