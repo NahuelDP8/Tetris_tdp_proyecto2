@@ -132,13 +132,13 @@ public class GUI{
 		
 	}	
 	public void captarMovimientoIzq() {
-		log.moverIzquierda();
+		log.operarJuego(log.getIzquierda());
 		
 	}
 	
 	
 	public void captarMovimientoDer() {
-		log.moverDerecha();
+		log.operarJuego(log.getDerecha());
 		
 	}
 	
@@ -148,11 +148,11 @@ public class GUI{
 	}
 	
 	public void captarMovimientoAbajo() {
-		log.moverAbajo();
+		log.operarJuego(log.getAbajo());
 	}
 	
 	public void captarOpcionRotar() {
-		log.rotarTetrimino();
+		log.operarJuego(log.getRotar());
 		
 	}
 	
