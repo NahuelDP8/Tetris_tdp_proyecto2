@@ -8,6 +8,11 @@ import GUI.*;
 
 public class Logica {
 	protected int puntos;
+	protected final int MOVER_ABAJO = 0;
+	protected final int MOVER_IZQUIERDA = 1;
+	protected final int MOVER_DERECHA = 2;
+	protected final int MOVER_ROTAR = 3;
+	
 	protected Celda matrizCeldas[][] = new Celda[25][10] ;
 	protected Tetrimino tetriminoActual;
 	protected GUI miGui;
@@ -81,6 +86,31 @@ public class Logica {
 		//Debemos para el reloj y el corrimiento automático hacia abajo del tetrimino actual. 
 		miReloj.gameOver();
 		//Debemos avisarle a la gui que terminó el juego. 
+	}
+	
+	public synchronized void operarJuego(int operacion) {
+		switch(operacion) {
+		case MOVER_ABAJO: {moverAbajo(); break;}
+		case MOVER_IZQUIERDA: {moverIzquierda(); break;}
+		case MOVER_DERECHA: {moverDerecha(); break;}
+		case MOVER_ROTAR: {rotarTetrimino(); break;}
+		}
+	}
+	
+	public int getAbajo() {
+		return MOVER_ABAJO;
+	}
+	
+	public int getIzquierda() {
+		return MOVER_IZQUIERDA;
+	}
+	
+	public int getDerecha() {
+		return MOVER_DERECHA;
+	}
+	
+	public int getRotar() {
+		return MOVER_ROTAR;
 	}
 	
 	public void rotarTetrimino() {

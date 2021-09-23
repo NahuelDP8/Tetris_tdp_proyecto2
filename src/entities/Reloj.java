@@ -47,7 +47,7 @@ public class Reloj implements Runnable {
 		while (ct == hiloBajar) {
 			try {
 				Thread.sleep(pausa);
-				miLogica.moverAbajo();
+				miLogica.operarJuego(miLogica.getAbajo());
 			} catch(InterruptedException e) {
 				Thread.currentThread().interrupt();
 			}
