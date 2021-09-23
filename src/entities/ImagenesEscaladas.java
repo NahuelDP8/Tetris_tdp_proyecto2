@@ -14,8 +14,16 @@ public class ImagenesEscaladas {
 	private ImageIcon EscaladaRojo=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/rojo.png"));
 	private ImageIcon EscaladaVerde=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/verde.png"));
 	private ImageIcon EscaladaVioleta=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/violeta.png"));
+	private ImageIcon EscaladaOAmarillo=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/cuadradoAma.png"));
+	private ImageIcon EscaladaJAzul=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/JAzul.png"));
+	private ImageIcon EscaladaICeleste=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/ICeleste.png"));
+	private ImageIcon EscaladaLNaranja=new ImageIcon(ImagenesEscaladas.class.getResource("/Imagenes/LNaranja.png"));
+	//private ImageIcon
+	//private ImageIcon
 	private final static int x=25;
 	private final static int y=25;
+	private final static int XG=133;
+	private final static int YG=100;
 	
 	public ImagenesEscaladas() {
 		Image EscalandoFoto=null;
@@ -43,6 +51,18 @@ public class ImagenesEscaladas {
 		//escalado de violeta
 		EscalandoFoto = EscaladaVioleta.getImage().getScaledInstance(x,y, Image.SCALE_SMOOTH);
 		EscaladaVioleta = new ImageIcon(EscalandoFoto);
+		//Imagen del cuadrado "O" Amarillo
+		EscalandoFoto = EscaladaOAmarillo.getImage().getScaledInstance(XG,YG, Image.SCALE_SMOOTH);
+		EscaladaOAmarillo = new ImageIcon(EscalandoFoto);
+		//Imagen del "J" Azul
+		EscalandoFoto = EscaladaJAzul.getImage().getScaledInstance(XG,YG, Image.SCALE_SMOOTH);
+		EscaladaJAzul = new ImageIcon(EscalandoFoto);
+		//Imagen del "I" Celeste
+		EscalandoFoto = EscaladaICeleste.getImage().getScaledInstance(XG,YG, Image.SCALE_SMOOTH);
+		EscaladaICeleste = new ImageIcon(EscalandoFoto);
+		//Imagen del "L"
+		EscalandoFoto = EscaladaLNaranja.getImage().getScaledInstance(XG,YG, Image.SCALE_SMOOTH);
+		EscaladaLNaranja = new ImageIcon(EscalandoFoto);
 	}
 	
 
@@ -70,6 +90,16 @@ public class ImagenesEscaladas {
 	}
 	public ImageIcon getVioleta() {
 		return EscaladaVioleta;
+	}
+	public ImageIcon getOAmarillo() {
+		return EscaladaOAmarillo;
+	}
+	public ImageIcon getJAzul(){
+		return EscaladaJAzul;
+	}
+	
+	public ImageIcon getICeleste() {
+		return EscaladaICeleste;
 	}
 
 }

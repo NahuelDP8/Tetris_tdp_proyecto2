@@ -13,12 +13,11 @@ public class Logica {
 	protected GUI miGui;
 	protected Reloj miReloj;
 	protected ImagenesEscaladas imagenes;
+	protected Tetrimino tetriminoSiguiente;
 	
 	public Logica(GUI miGui) {
 
 		this.puntos = 0;
-
-
 		imagenes=new ImagenesEscaladas();
 		puntos = 0;
 		this.miGui = miGui;
@@ -27,9 +26,11 @@ public class Logica {
 				matrizCeldas [i][j] = new Celda(j,i, false, imagenes.getGrisVacio());  
 				matrizCeldas [i][j].setOcupado(false);
 			}
+		
 		}
 
-		this.crearTetrimino();
+		tetriminoActual=this.crearTetrimino(NumRandom());
+		tetriminoSiguiente=this.crearTetrimino(NumRandom());
 		this.miReloj = new Reloj(this); 
 	}
 	
@@ -42,28 +43,37 @@ public class Logica {
 		return hayDerrota;
 	}
 	
-	private void crearTetrimino() { 
+	
+	private int NumRandom() {
+		int min = 1;
+		int max = 7;
+		Random random = new Random();
+		//Nos devuelve un número aleatorio del 1 al 7
+		int valor = random.nextInt(max - min) + min;
+		return valor;
+	}
+	
+	private Tetrimino crearTetrimino(int valor) { 
+		Tetrimino devolverT=null;
 		//Antes de crear un tetrimino debemos verificar que no hayamos perdido
 		boolean perdimos = this.verificarPerdidaJuego();
 		if(perdimos) {
 			gameOver();
 		}else { 
-			int min = 1;
-			int max = 7;
-			Random random = new Random();
-			//Nos devuelve un número aleatorio del 1 al 7
-			int valor = random.nextInt(max - min) + min;
+			
 			switch (valor) {
 
-				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]); break;
-				case 2:  tetriminoActual = new PiezaJ(0,matrizCeldas[1][3], matrizCeldas[2][3], matrizCeldas[2][4], matrizCeldas[2][5]); break;
-				case 3:  tetriminoActual = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]); break;
-				case 4:  tetriminoActual = new PiezaO(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][4], matrizCeldas[2][5]); break;
-				case 5:  tetriminoActual = new PiezaZ(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][5], matrizCeldas[2][6]); break;
-				case 6:  tetriminoActual = new PiezaT(0,matrizCeldas[2][4], matrizCeldas[1][4], matrizCeldas[2][3], matrizCeldas[2][5]); break;
-				case 7:  tetriminoActual = new PiezaS(0,matrizCeldas[1][5], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[2][3]); break;
+				case 1:  devolverT = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]); break;
+				case 2:  devolverT = new PiezaJ(0,matrizCeldas[1][3], matrizCeldas[2][3], matrizCeldas[2][4], matrizCeldas[2][5]); break;
+				case 3:  devolverT = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]); break;
+				case 4:  devolverT = new PiezaO(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][4], matrizCeldas[2][5]); break;
+				case 5:  devolverT = new PiezaZ(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][5], matrizCeldas[2][6]); break;
+				case 6:  devolverT = new PiezaT(0,matrizCeldas[2][4], matrizCeldas[1][4], matrizCeldas[2][3], matrizCeldas[2][5]); break;
+				case 7:  devolverT = new PiezaS(0,matrizCeldas[1][5], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[2][3]); break;
 			}
 		}	
+		return devolverT;
+		
 	} 
 	
 	private void gameOver() {
@@ -135,7 +145,9 @@ public class Logica {
 			if(lineasCompletas!=0) {
 				this.sumarPuntaje(lineasCompletas);
 				this.miGui.actualizaPuntaje(this.puntos);			}
-			crearTetrimino();
+			tetriminoActual=tetriminoSiguiente;
+			tetriminoSiguiente=crearTetrimino(NumRandom());
+			miGui.actualizarTetriminoSiguiente(tetriminoSiguiente.getMiImagen());
 		}
 	}
 	

@@ -10,6 +10,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Logic.Logica;
+import entities.ImagenesEscaladas;
+import entities.PiezaI;
+import entities.PiezaJ;
+import entities.PiezaL;
+import entities.PiezaO;
+import entities.PiezaS;
+import entities.PiezaT;
+import entities.PiezaZ;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -71,26 +79,36 @@ public class GUI{
 	
 		//Panel donde se crea la matriz
 		PMatriz = new JPanel();
-		PMatriz.setBounds(20, 51, 356, 625);
+		PMatriz.setBounds(20, 25, 356, 678);
 		frame.getContentPane().add(PMatriz);
 		PMatriz.setLayout(null);
 	
 		PTiempo_Puntos_TetriminoS = new JPanel();
-		PTiempo_Puntos_TetriminoS.setBackground(Color.WHITE);
-		PTiempo_Puntos_TetriminoS.setBounds(0, 0, 250, 101);
+		PTiempo_Puntos_TetriminoS.setBackground(new Color(0, 0, 0));
+		PTiempo_Puntos_TetriminoS.setBounds(0, 0, 356, 100);
 		PMatriz.add(PTiempo_Puntos_TetriminoS);
 		PTiempo_Puntos_TetriminoS.setLayout(null);
 		
 		
 		JLTiempo = new JLabel("00:00");
+		JLTiempo.setForeground(new Color(0, 128, 0));
 		JLTiempo.setFont(new Font("Magneto", Font.BOLD | Font.ITALIC, 48));
-		JLTiempo.setBounds(31, 10, 209, 52);
+		JLTiempo.setBounds(10, 10, 203, 52);
 		PTiempo_Puntos_TetriminoS.add(JLTiempo);
 		
 		JLPuntaje = new JLabel("Puntaje: 0");
+		JLPuntaje.setForeground(new Color(0, 128, 0));
 		JLPuntaje.setFont(new Font("OCR A Extended", Font.BOLD | Font.ITALIC, 20));
 		JLPuntaje.setBounds(10, 66, 230, 25);
 		PTiempo_Puntos_TetriminoS.add(JLPuntaje);
+		
+			//necesitamos que el random aparezca antes, osea crear un metodo para el random
+			//y tener q imagen y tetrimino siguiente viene
+			JLTetriminoSiguiente = new JLabel("");
+			JLTetriminoSiguiente.setBounds(223, 0, 133, 100);
+			PTiempo_Puntos_TetriminoS.add(JLTetriminoSiguiente);
+			JLTetriminoSiguiente.setForeground(new Color(0, 128, 0));
+			JLTetriminoSiguiente.setBackground(Color.WHITE);
 			
 			
 			PPerdiste = new JPanel();
@@ -107,12 +125,6 @@ public class GUI{
 			JLPerdiste.setToolTipText("");
 			JLPerdiste.setHorizontalAlignment(SwingConstants.CENTER);
 			JLPerdiste.setFont(new Font("Stencil", Font.PLAIN, 20));
-				
-			//necesitamos que el random aparezca antes, osea crear un metodo para el random
-			//y tener q imagen y tetrimino siguiente viene
-			JLTetriminoSiguiente = new JLabel("---____________---");
-			JLTetriminoSiguiente.setBounds(250, 0, 110, 101);
-			PMatriz.add(JLTetriminoSiguiente);
 			PPerdiste.setVisible(false);
 		
 		
@@ -144,7 +156,7 @@ public class GUI{
 	
 	// gui ya tiene que saber cual es el proximo, el random lo tenemos que hacer antes
 	public void actualizarTetriminoSiguiente(ImageIcon imagen){
-		//JLTetriminoSiguiente.setIcon(imagen);
+		JLTetriminoSiguiente.setIcon(imagen);
 	}
 	
 	public void captarMovimientoAbajo() {

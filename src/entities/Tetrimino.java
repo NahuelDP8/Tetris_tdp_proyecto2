@@ -9,6 +9,7 @@ public abstract class Tetrimino {
 	protected ImageIcon Photo; 
 	protected int rotacion; 
 	protected ArrayList<Celda> listaCeldas;
+	protected ImageIcon MiImagen;
 	//Constructor
 	public Tetrimino(int rotacion, ImageIcon Photo, Celda c1, Celda c2, Celda c3, Celda c4)  {
 		listaCeldas = new ArrayList<Celda>();
@@ -21,6 +22,9 @@ public abstract class Tetrimino {
 	}
 	protected void setImageIcon(ImageIcon P){
 		Photo=P;
+	}
+	protected void setMiImagen(ImageIcon p) {
+		MiImagen=p;
 	}
 
 	abstract public ArrayList<PairTupla> rotar(ArrayList<PairTupla> antiguas); 
@@ -43,6 +47,9 @@ public abstract class Tetrimino {
 	
 	public int getRotacion() {
 		return rotacion;
+	}
+	public ImageIcon getMiImagen() {
+		return MiImagen;
 	}
 	
 	public ArrayList<PairTupla> moverDerecha(ArrayList<PairTupla> futuras) {
