@@ -13,7 +13,7 @@ public class Logica {
 	protected final int MOVER_DERECHA = 2;
 	protected final int MOVER_ROTAR = 3;
 	
-	protected Celda matrizCeldas[][] = new Celda[25][10] ;
+	protected Celda matrizCeldas[][] = new Celda[25][10] ;// Matriz de 25x10 celdas
 	protected Tetrimino tetriminoActual;
 	protected GUI miGui;
 	protected Reloj miReloj;
@@ -188,6 +188,7 @@ public class Logica {
 	}
 	
 	private void sumarPuntaje(int lineasCompletas) {
+		//Suma puntaje segun cantidad de lineas eliminadas.
 		if(lineasCompletas == 1) {
 			puntos = puntos + 100;
 		}else if(lineasCompletas ==2) {

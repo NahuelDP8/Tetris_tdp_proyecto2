@@ -55,6 +55,11 @@ public class PiezaJ extends Tetrimino{
 	public ArrayList<PairTupla> rotar(ArrayList<PairTupla> antiguas) {
 		ArrayList<PairTupla> futuras = new ArrayList<PairTupla>();
 		Celda celdaAux;
+		//La lista antiguas guarda las posiciones de las celdas que dejaran de estar ocupadas.
+		//La lista futuras guarda las posiciones de las celdas que empezaran a ocuparse.
+		//Para las celdas que, tras la rotación, siguen estando ocupadas, no cambia nada.
+				
+		
 		//Ordenamos la lista de celdas que componen al tetrimino:
 		ordenar(listaCeldas);
 		//Rotacion en angulo 0:

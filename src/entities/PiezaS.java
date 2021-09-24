@@ -54,10 +54,15 @@ public class PiezaS extends Tetrimino{
 
 	public ArrayList<PairTupla> rotar(ArrayList<PairTupla> antiguas) {
 		ArrayList<PairTupla> futuras = new ArrayList<PairTupla>();
+		//La lista antiguas guarda las posiciones de las celdas que dejaran de estar ocupadas.
+		//La lista futuras guarda las posiciones de las celdas que empezaran a ocuparse.
+		//Para las celdas que, tras la rotación, siguen estando ocupadas, no cambia nada.
+				
+		
 		Celda celdaAux;
-		
+		//Ordenamos la lista de celdas que componen al tetrimino:
 		ordenar(listaCeldas);
-		
+		//Rotacion en angulo 0:
 		if(rotacion == 0) {
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
@@ -66,6 +71,7 @@ public class PiezaS extends Tetrimino{
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX(), celdaAux.getY()+2));	
+		//Rotacion en angulo 90:
 		} else if(rotacion == 90){
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
@@ -74,7 +80,7 @@ public class PiezaS extends Tetrimino{
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-1, celdaAux.getY()));
-			
+		//Rotacion en angulo 180:
 		} else if(rotacion == 180){
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
@@ -83,7 +89,7 @@ public class PiezaS extends Tetrimino{
 			celdaAux = listaCeldas.get(3);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
 			futuras.add(new PairTupla(celdaAux.getX()-2, celdaAux.getY()));;
-			
+		//Rotacion en angulo 270:
 		} else if(rotacion == 270){
 			celdaAux = listaCeldas.get(0);
 			antiguas.add(new PairTupla(celdaAux.getX(), celdaAux.getY()));
