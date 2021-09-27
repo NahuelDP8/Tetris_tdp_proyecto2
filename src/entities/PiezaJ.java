@@ -9,7 +9,8 @@ public class PiezaJ extends Tetrimino{
 	public PiezaJ(int rotacion, Celda c1, Celda c2, Celda c3, Celda c4) {
 		super(rotacion, null,c1,c2,c3,c4);
 		ImagenesEscaladas imagenes=new ImagenesEscaladas();
-		this.setImageIcon(imagenes.getNaranja());
+		this.setImageIcon(imagenes.getAzul());
+		MiImagen=imagenes.getJAzul();
 	}
 	
 	
@@ -54,6 +55,11 @@ public class PiezaJ extends Tetrimino{
 	public ArrayList<PairTupla> rotar(ArrayList<PairTupla> antiguas) {
 		ArrayList<PairTupla> futuras = new ArrayList<PairTupla>();
 		Celda celdaAux;
+		//La lista antiguas guarda las posiciones de las celdas que dejaran de estar ocupadas.
+		//La lista futuras guarda las posiciones de las celdas que empezaran a ocuparse.
+		//Para las celdas que, tras la rotación, siguen estando ocupadas, no cambia nada.
+				
+		
 		//Ordenamos la lista de celdas que componen al tetrimino:
 		ordenar(listaCeldas);
 		//Rotacion en angulo 0:

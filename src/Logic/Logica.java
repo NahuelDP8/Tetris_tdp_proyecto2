@@ -8,17 +8,22 @@ import GUI.*;
 
 public class Logica {
 	protected int puntos;
-	protected Celda matrizCeldas[][] = new Celda[25][10] ;
+	protected final int MOVER_ABAJO = 0;
+	protected final int MOVER_IZQUIERDA = 1;
+	protected final int MOVER_DERECHA = 2;
+	protected final int MOVER_ROTAR = 3;
+	
+	protected Celda matrizCeldas[][] = new Celda[25][10] ;// Matriz de 25x10 celdas
 	protected Tetrimino tetriminoActual;
 	protected GUI miGui;
 	protected Reloj miReloj;
 	protected ImagenesEscaladas imagenes;
+	protected Tetrimino tetriminoSiguiente;
+	protected boolean perdiste=false;
 	
 	public Logica(GUI miGui) {
 
 		this.puntos = 0;
-
-
 		imagenes=new ImagenesEscaladas();
 		puntos = 0;
 		this.miGui = miGui;
@@ -27,9 +32,13 @@ public class Logica {
 				matrizCeldas [i][j] = new Celda(j,i, false, imagenes.getGrisVacio());  
 				matrizCeldas [i][j].setOcupado(false);
 			}
+		
 		}
 
-		this.crearTetrimino();
+		tetriminoActual=this.crearTetrimino(NumRandom());
+		
+		tetriminoSiguiente=this.crearTetrimino(NumRandom());
+		miGui.actualizarTetriminoSiguiente(tetriminoSiguiente.getMiImagen());
 		this.miReloj = new Reloj(this); 
 	}
 	
@@ -42,7 +51,18 @@ public class Logica {
 		return hayDerrota;
 	}
 	
-	private void crearTetrimino() { 
+	
+	private int NumRandom() {
+		int min = 1;
+		int max = 8;
+		Random random = new Random();
+		//Nos devuelve un número aleatorio del 1 al 7
+		int valor = random.nextInt(max - min) + min;
+		return valor;
+	}
+	
+	private Tetrimino crearTetrimino(int valor) { 
+		Tetrimino devolverT=null;
 		//Antes de crear un tetrimino debemos verificar que no hayamos perdido
 		boolean perdimos = this.verificarPerdidaJuego();
 		if(perdimos) {
@@ -56,24 +76,52 @@ public class Logica {
 
 			switch (valor) {
 
-				case 1:  tetriminoActual = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]); break;
-				case 2:  tetriminoActual = new PiezaJ(0,matrizCeldas[1][3], matrizCeldas[2][3], matrizCeldas[2][4], matrizCeldas[2][5]); break;
-				case 3:  tetriminoActual = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]); break;
-				case 4:  tetriminoActual = new PiezaO(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][4], matrizCeldas[2][5]); break;
-				case 5:  tetriminoActual = new PiezaZ(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][5], matrizCeldas[2][6]); break;
-				case 6:  tetriminoActual = new PiezaT(0,matrizCeldas[2][4], matrizCeldas[1][4], matrizCeldas[2][3], matrizCeldas[2][5]); break;
-				case 7:  tetriminoActual = new PiezaS(0,matrizCeldas[1][5], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[2][3]); break;
+				case 1:  devolverT = new PiezaI(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[1][6]); break;
+				case 2:  devolverT = new PiezaJ(0,matrizCeldas[1][3], matrizCeldas[2][3], matrizCeldas[2][4], matrizCeldas[2][5]); break;
+				case 3:  devolverT = new PiezaL(0,matrizCeldas[1][3], matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[0][5]); break;
+				case 4:  devolverT = new PiezaO(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][4], matrizCeldas[2][5]); break;
+				case 5:  devolverT = new PiezaZ(0,matrizCeldas[1][4], matrizCeldas[1][5], matrizCeldas[2][5], matrizCeldas[2][6]); break;
+				case 6:  devolverT = new PiezaT(0,matrizCeldas[2][4], matrizCeldas[1][4], matrizCeldas[2][3], matrizCeldas[2][5]); break;
+				case 7:  devolverT = new PiezaS(0,matrizCeldas[1][5], matrizCeldas[1][4], matrizCeldas[2][4], matrizCeldas[2][3]); break;
 			}
 		}	
+		return devolverT;
+		
 	} 
 	
 	private void gameOver() {
+		perdiste=true;
 		miGui.gameOver();
 		//Debemos para el reloj y el corrimiento automático hacia abajo del tetrimino actual. 
 		miReloj.gameOver();
 		//Debemos avisarle a la gui que terminó el juego. 
 	}
-
+	
+	public synchronized void operarJuego(int operacion) {
+		switch(operacion) {
+		case MOVER_ABAJO: {moverAbajo(); break;}
+		case MOVER_IZQUIERDA: {moverIzquierda(); break;}
+		case MOVER_DERECHA: {moverDerecha(); break;}
+		case MOVER_ROTAR: {rotarTetrimino(); break;}
+		}
+	}
+	
+	public int getAbajo() {
+		return MOVER_ABAJO;
+	}
+	
+	public int getIzquierda() {
+		return MOVER_IZQUIERDA;
+	}
+	
+	public int getDerecha() {
+		return MOVER_DERECHA;
+	}
+	
+	public int getRotar() {
+		return MOVER_ROTAR;
+	}
+	
 	public void rotarTetrimino() {
 		boolean verificado = false;	
 		int rotacion;
@@ -136,11 +184,16 @@ public class Logica {
 			if(lineasCompletas!=0) {
 				this.sumarPuntaje(lineasCompletas);
 				this.miGui.actualizaPuntaje(this.puntos);			}
-			crearTetrimino();
+			tetriminoActual=tetriminoSiguiente;
+			tetriminoSiguiente=crearTetrimino(NumRandom());
+			if(!perdiste) {
+			miGui.actualizarTetriminoSiguiente(tetriminoSiguiente.getMiImagen());
+			}
 		}
 	}
 	
 	private void sumarPuntaje(int lineasCompletas) {
+		//Suma puntaje segun cantidad de lineas eliminadas.
 		if(lineasCompletas == 1) {
 			puntos = puntos + 100;
 		}else if(lineasCompletas ==2) {
