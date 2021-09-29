@@ -73,13 +73,13 @@ public class GUIMenu extends JFrame {
 
 			}
 		});
-		btnNewButton.setBounds(83, 161, 155, 46);
+		btnNewButton.setBounds(87, 162, 155, 46);
 		
 		JLabel lblNewLabel = new JLabel("TETRIS");
-		lblNewLabel.setBounds(82, 30, 155, 78);
+		lblNewLabel.setBounds(22, 30, 291, 78);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Yu Gothic Light", Font.PLAIN, 48));
+		lblNewLabel.setFont(new Font("Yu Gothic Light", Font.PLAIN, 45));
 		contentPane.setLayout(null);
 		contentPane.add(btnNewButton);
 		contentPane.add(lblNewLabel);
@@ -97,7 +97,7 @@ public class GUIMenu extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Source Sans Pro", Font.BOLD, 14));
-		btnNewButton_1.setBounds(83, 277, 155, 46);
+		btnNewButton_1.setBounds(88, 277, 155, 46);
 		contentPane.add(btnNewButton_1);
 		
 		JLabel Fondo = new JLabel("");
