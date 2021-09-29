@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -13,12 +12,18 @@ import Logic.Logica;
 
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUI{
 	
-	private JFrame frame;
+	public JFrame frmTetris;
 	private Logica log;
 	private JLabel [][] labels = new JLabel[25][10];
 	private JLabel JLTiempo;
@@ -33,18 +38,18 @@ public class GUI{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI window = new GUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					GUI window = new GUI();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
@@ -59,66 +64,95 @@ public class GUI{
 	 */
 	private void initialize() {
 		//Listener Eventos
+		
 		EventoDeTeclado tecla=new EventoDeTeclado();
-		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(0, 0, 0));
-		frame.setBounds(400,60,400,750);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.addKeyListener(tecla);
-		frame.getContentPane().setLayout(null);
+		frmTetris = new JFrame();
+		frmTetris.setTitle("Tetris");
+		frmTetris.getContentPane().setBackground(new Color(0, 0, 0));
+		frmTetris.setBounds(400,60,351,722);
+		frmTetris.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTetris.addKeyListener(tecla);
+		frmTetris.getContentPane().setLayout(null);
+		frmTetris.setIconImage(java.awt.Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/Imagenes/naranja.png")));
 		
 		jugando = true;
-	
-		//Panel donde se crea la matriz
-		PMatriz = new JPanel();
-		PMatriz.setBackground(new Color(0, 0, 0));
-		PMatriz.setBounds(20, 25, 356, 678);
-		frame.getContentPane().add(PMatriz);
-		PMatriz.setLayout(null);
-	
-		PTiempo_Puntos_TetriminoS = new JPanel();
-		PTiempo_Puntos_TetriminoS.setBackground(new Color(0, 0, 0));
-		PTiempo_Puntos_TetriminoS.setBounds(0, 0, 356, 100);
-		PMatriz.add(PTiempo_Puntos_TetriminoS);
-		PTiempo_Puntos_TetriminoS.setLayout(null);
-		
-		
-		JLTiempo = new JLabel("00:00");
-		JLTiempo.setForeground(new Color(0, 128, 0));
-		JLTiempo.setFont(new Font("Magneto", Font.BOLD | Font.ITALIC, 48));
-		JLTiempo.setBounds(10, 10, 203, 52);
-		PTiempo_Puntos_TetriminoS.add(JLTiempo);
-		
-		JLPuntaje = new JLabel("Puntaje: 0");
-		JLPuntaje.setForeground(new Color(0, 128, 0));
-		JLPuntaje.setFont(new Font("OCR A Extended", Font.BOLD | Font.ITALIC, 20));
-		JLPuntaje.setBounds(10, 66, 230, 25);
-		PTiempo_Puntos_TetriminoS.add(JLPuntaje);
-		
-			//necesitamos que el random aparezca antes, osea crear un metodo para el random
-			//y tener q imagen y tetrimino siguiente viene
-			JLTetriminoSiguiente = new JLabel("");
-			JLTetriminoSiguiente.setBounds(223, 0, 133, 100);
-			PTiempo_Puntos_TetriminoS.add(JLTetriminoSiguiente);
-			JLTetriminoSiguiente.setForeground(new Color(0, 128, 0));
-			JLTetriminoSiguiente.setBackground(Color.WHITE);
 			
 			
 			PPerdiste = new JPanel();
-			PPerdiste.setBounds(0, 335, 356, 142);
-			PMatriz.add(PPerdiste);
-			PPerdiste.setBackground(new Color(0, 0, 0));
-			PPerdiste.setLayout(null);
+			PPerdiste.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			PPerdiste.setForeground(Color.WHITE);
+			PPerdiste.setBounds(0, 335, 335, 142);
+			//		PMatriz.add(PPerdiste);
+					frmTetris.getContentPane().add(PPerdiste);
+					PPerdiste.setBackground(new Color(0, 0, 0));
+					PPerdiste.setLayout(null);
+					
+					JButton btnNewButton = new JButton("Volver al menu");
+					btnNewButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							EventQueue.invokeLater(new Runnable() {
+								public void run() {
+									try {
+										GUIMenu Nframe = new GUIMenu();
+										Nframe.setVisible(true);
+										frmTetris.dispose();
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							});
+						}
+					});
+					btnNewButton.setBounds(109, 87, 118, 23);
+					PPerdiste.add(btnNewButton);
+					
+					JLPerdiste = new JLabel("JUEGO TERMINADO");
+					JLPerdiste.setBounds(10, 0, 320, 112);
+					PPerdiste.add(JLPerdiste);
+					JLPerdiste.setForeground(Color.WHITE);
+					JLPerdiste.setBackground(new Color(255, 255, 255));
+					JLPerdiste.setToolTipText("");
+					JLPerdiste.setHorizontalAlignment(SwingConstants.CENTER);
+					JLPerdiste.setFont(new Font("Yu Gothic Light", Font.PLAIN, 20));
+					PPerdiste.setVisible(false);
+	
+		//Panel donde se crea la matriz
+		PMatriz = new JPanel();
+		PMatriz.setBorder(null);
+		PMatriz.setBackground(new Color(0, 0, 0));
+		PMatriz.setBounds(42, 27, 250, 630); //PMatriz.setBounds(20, 25, 356, 678); //
+		frmTetris.getContentPane().add(PMatriz);
+		PMatriz.setLayout(null);
+		
+			PTiempo_Puntos_TetriminoS = new JPanel();
+			PTiempo_Puntos_TetriminoS.setBounds(0, 0, 250, 100);
+			PMatriz.add(PTiempo_Puntos_TetriminoS);
+			PTiempo_Puntos_TetriminoS.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			PTiempo_Puntos_TetriminoS.setBackground(new Color(0, 0, 0));
+			PTiempo_Puntos_TetriminoS.setLayout(null);
 			
-			JLPerdiste = new JLabel("Lo siento has sido derrotado");
-			JLPerdiste.setBounds(10, 10, 336, 123);
-			PPerdiste.add(JLPerdiste);
-			JLPerdiste.setForeground(new Color(0, 128, 0));
-			JLPerdiste.setBackground(new Color(255, 255, 255));
-			JLPerdiste.setToolTipText("");
-			JLPerdiste.setHorizontalAlignment(SwingConstants.CENTER);
-			JLPerdiste.setFont(new Font("Stencil", Font.PLAIN, 20));
-			PPerdiste.setVisible(false);
+			
+			JLTiempo = new JLabel("00:00");
+			JLTiempo.setVerticalAlignment(SwingConstants.TOP);
+			JLTiempo.setForeground(Color.WHITE);
+			JLTiempo.setFont(new Font("Yu Gothic Light", Font.PLAIN, 48));
+			JLTiempo.setBounds(10, 10, 203, 52);
+			PTiempo_Puntos_TetriminoS.add(JLTiempo);
+			
+			JLPuntaje = new JLabel("Puntos: 0");
+			JLPuntaje.setVerticalAlignment(SwingConstants.TOP);
+			JLPuntaje.setForeground(Color.WHITE);
+			JLPuntaje.setFont(new Font("Yu Gothic Light", Font.PLAIN, 20));
+			JLPuntaje.setBounds(10, 66, 230, 25);
+			PTiempo_Puntos_TetriminoS.add(JLPuntaje);
+			
+			//necesitamos que el random aparezca antes, osea crear un metodo para el random
+			//y tener q imagen y tetrimino siguiente viene
+			JLTetriminoSiguiente = new JLabel("");
+			JLTetriminoSiguiente.setBounds(180, 25, 60, 48);
+			PTiempo_Puntos_TetriminoS.add(JLTetriminoSiguiente);
+			JLTetriminoSiguiente.setForeground(new Color(0, 128, 0));
+			JLTetriminoSiguiente.setBackground(Color.WHITE);
 		
 		
 		JLabel label;
@@ -149,7 +183,9 @@ public class GUI{
 	
 	// gui ya tiene que saber cual es el proximo, el random lo tenemos que hacer antes
 	public void actualizarTetriminoSiguiente(ImageIcon imagen){
-		JLTetriminoSiguiente.setIcon(imagen);
+		Image EscalarFoto = imagen.getImage().getScaledInstance(JLTetriminoSiguiente.getWidth(),JLTetriminoSiguiente.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon FotoEscalada = new ImageIcon(EscalarFoto);
+		JLTetriminoSiguiente.setIcon(FotoEscalada);
 	}
 	
 	public void captarMovimientoAbajo() {
@@ -172,12 +208,18 @@ public class GUI{
 	}
 	
 	public void actualizaPuntaje(int puntaje) {
-		JLPuntaje.setText("Puntaje= "+puntaje);
+		JLPuntaje.setText("Puntos: "+puntaje);
 	}
 	
 
 	public void actualizarReloj(int min, int seg) {
-		JLTiempo.setText(min+":"+seg);
+		String minutos= ""+min;
+		String segundos= ""+seg;
+		if(min<10)
+			minutos= "0"+min;
+		if(seg<10)
+			segundos= "0"+seg;
+		JLTiempo.setText(minutos+":"+segundos);
 	}
 
 
@@ -217,5 +259,3 @@ public class GUI{
 		}
 	}
 }
-	
-
