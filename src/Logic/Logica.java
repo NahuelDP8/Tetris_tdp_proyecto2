@@ -1,7 +1,5 @@
 package Logic;
 import entities.*;
-
-import java.util.Random;
 import java.util.ArrayList;
 
 import GUI.*;
@@ -33,13 +31,16 @@ public class Logica {
 		}
 		this.miGui = miGui;
 		this.puntos = 0;
-		this.miFabrica = new FabricaTetrimino(matrizCeldas);
+		this.miFabrica = new FabricaTetrimino(this);
 		this.tetriminoActual= crearTetrimino();
 		this.tetriminoSiguiente= crearTetrimino();
 		this.miGui.actualizarTetriminoSiguiente(tetriminoSiguiente.getMiImagen());
 		this.miReloj = new Reloj(this); 
 	}
 	
+	public Celda getCelda(int fila, int columna) {
+		return matrizCeldas[fila][columna];
+	}
 	public int getAbajo() {
 		return MOVER_ABAJO;
 	}
@@ -58,10 +59,10 @@ public class Logica {
 	
 	public synchronized void operarJuego(int operacion) {
 		switch(operacion) {
-		case MOVER_ABAJO: {moverAbajo(); break;}
-		case MOVER_IZQUIERDA: {moverIzquierda(); break;}
-		case MOVER_DERECHA: {moverDerecha(); break;}
-		case MOVER_ROTAR: {rotarTetrimino(); break;}
+			case MOVER_ABAJO: {moverAbajo(); break;}
+			case MOVER_IZQUIERDA: {moverIzquierda(); break;}
+			case MOVER_DERECHA: {moverDerecha(); break;}
+			case MOVER_ROTAR: {rotarTetrimino(); break;}
 		}
 	}
 	
@@ -72,6 +73,7 @@ public class Logica {
 		if(perdimos) {
 			gameOver();
 		}else { 
+		//retornamos un nuevo tetrimino a partir de nuestra fábrica
 			devolverT = miFabrica.crearTetrimino();
 		}	
 		return devolverT;
@@ -80,6 +82,8 @@ public class Logica {
 	
 	private boolean verificarPerdidaJuego() {
 		boolean hayDerrota = false;
+		//La matriz de celdas habilitada para el juego comienza a partir de la fila 4
+		//Por ende debemos corroborar que la primer fila inhabilitada nunca tenga una celda ocupada mientras se esté jugando
 		for(int j =0 ; j<=9 && !hayDerrota; j++) {
 			if(matrizCeldas[3][j].getOcupado() == true)
 				hayDerrota=true;
@@ -89,10 +93,10 @@ public class Logica {
 	
 	private void gameOver() {
 		perdiste=true;
+		//Debemos avisarle a la gui que terminó el juego.
 		miGui.gameOver();
-		//Debemos para el reloj y el corrimiento automático hacia abajo del tetrimino actual. 
+		//Debemos parar el reloj y el corrimiento automático hacia abajo del tetrimino actual. 
 		miReloj.gameOver();
-		//Debemos avisarle a la gui que terminó el juego. 
 	}
 	
 	public void rotarTetrimino() {
@@ -100,7 +104,7 @@ public class Logica {
 		int rotacion;
 		//Creamos una lista de aquellas posiciones NUEVAS que pasarían a ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> ocupar =  new ArrayList<PairTupla> (); 
-		////Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
+		//Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> desocupar = tetriminoActual.rotar(ocupar);		
 		verificado = verificarPosicionesFuturas(desocupar);
 		if(verificado) {
@@ -118,9 +122,8 @@ public class Logica {
 		boolean verificado = false;
 		//Creamos una lista de aquellas posiciones NUEVAS que pasarían a ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> ocupar =  new ArrayList<PairTupla> (); 
-		////Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
+		//Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> desocupar = tetriminoActual.moverDerecha(ocupar);
-		
 		verificado = verificarPosicionesFuturas(ocupar);
 		if(verificado) {
 			realizarMovimientos(ocupar, desocupar);
@@ -132,9 +135,8 @@ public class Logica {
 		
 		//Creamos una lista de aquellas posiciones NUEVAS que pasarían a ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> ocupar =  new ArrayList<PairTupla> (); 
-		////Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
+		//Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> desocupar = tetriminoActual.moverIzquierda(ocupar);
-		
 		verificado = verificarPosicionesFuturas(ocupar);
 		if(verificado) {
 			realizarMovimientos(ocupar, desocupar);
@@ -143,24 +145,24 @@ public class Logica {
 	
 	public void moverAbajo() {
 		boolean verificado = false;
-		
 		//Creamos una lista de aquellas posiciones NUEVAS que pasarían a ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> ocupar =  new ArrayList<PairTupla> (); 
-		////Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
+		//Creamos una lista de aquellas posiciones ANTIGUAS que dejarían de ser ocupadas por el tetrimino actual
 		ArrayList<PairTupla> desocupar = tetriminoActual.moverAbajo(ocupar);
 		
 		verificado = verificarPosicionesFuturas(ocupar);	
 		if(verificado) {
 			realizarMovimientos(ocupar, desocupar);
 		} else{
+			//Significa que no podemos movernos más hacia abajo.
 			int lineasCompletas = this.buscarLineasCompletas();
 			if(lineasCompletas!=0) {
 				this.sumarPuntaje(lineasCompletas);
 				this.miGui.actualizaPuntaje(this.puntos);			}
-			tetriminoActual=tetriminoSiguiente;
-			tetriminoSiguiente= crearTetrimino();
+				tetriminoActual=tetriminoSiguiente;
+				tetriminoSiguiente= crearTetrimino();
 			if(!perdiste) {
-			miGui.actualizarTetriminoSiguiente(tetriminoSiguiente.getMiImagen());
+				miGui.actualizarTetriminoSiguiente(tetriminoSiguiente.getMiImagen());
 			}
 		}
 	}
@@ -186,10 +188,12 @@ public class Logica {
 			PairTupla par = futuras.get(i);
 			int x = par.getX();
 			int y = par.getY();
+			//Controla que no nos estemos yendo fuera de la dimensiones de nuestra matriz
 			if(y>24 || y<0 || x>9 || x<0)
 				valida=false;
 			if(valida) {
 				Celda aux = matrizCeldas[y][x];
+				//Vemos que la celda que necesitamos ocupar esté liberada
 				if(aux.getOcupado() == true)
 					valida=false;
 			}
@@ -203,20 +207,26 @@ public class Logica {
 		ArrayList<Celda> celT = tetriminoActual.getCeldas();
 		
 		for(int i =0; i < desocupar.size(); i++){
+			//Tanto la lista ocupar como desocupar tendrán la misma cantidad de elementos. 
 			PairTupla pOcupar = ocupar.get(i);
 			PairTupla pDesocupar = desocupar.get(i);
 			Celda cOcupar = matrizCeldas[pOcupar.getY()][pOcupar.getX()];
 			Celda cDesocupar = matrizCeldas[pDesocupar.getY()][pDesocupar.getX()];
 			for(int j = 0; j<4  && !encontrado; j++) {
 				Celda cActual  = celT.get(j);
+				//Cuando encontremos una de las celdas a desocupar en la lista actual de celdas del tetrimino actual
+				//debemos realizar los cambios pertinentes con respecto a la celda (intercambiandola por alguna de las que vamos a ocupar),
+				// la lógica y notificar a la GUI. 
 				if(cActual == cDesocupar) {
 					encontrado = true;
 					cActual.actualizarImagen(imagenes.getGrisVacio());
+					//llamamos a la gui
 					this.actualizarCelda(cActual);
 					celT.set(j, cOcupar);
 					cOcupar.actualizarImagen(tetriminoActual.getPhoto());
 					cOcupar.setOcupado(true);
 					cDesocupar.setOcupado(false);
+					//llamaos a la gui 
 					this.actualizarCelda(cOcupar);
 				}
 			}
@@ -225,13 +235,15 @@ public class Logica {
 		
 	}
 	private void actualizarCelda(Celda celda) {
-		miGui.actualizarCelda(celda.getY(), celda.getX(), celda.getImagen());
+		//Actualizamos la gui en la posición que corresponda. 
+		this.miGui.actualizarCelda(celda.getY(), celda.getX(), celda.getImagen());
 	}
 	
 	private int buscarLineasCompletas() {
 		int cantLineasCompletas = 0; 
 		boolean hayUnaVacia = false;
 		for(int i =4; i < 25 ; i++ ) {
+			//Con que haya una celda vacía, ya podemos descartar esta línea.
 			if(matrizCeldas[i][0].getOcupado()==true) { 
 				for( int j = 1; j < 10 && !hayUnaVacia;j++ ) {
 					if(matrizCeldas[i][j].getOcupado() == false) 
@@ -251,6 +263,7 @@ public class Logica {
 	}
 
 	public void actualizarReloj() {
+		//Llamamos a la Gui para que el reloj se actualice. 
 		this.miGui.actualizarReloj(miReloj.getMinutos(), miReloj.getSegundos());
 	}
 	
@@ -281,6 +294,7 @@ public class Logica {
 	}
 
 	private void liberarLinea(int i) {
+		//Hacemos las modificaciones necesarias para que una línea quede completamente desocupada. 
 		for(int j = 0; j<=9; j++) {
 			Celda aux = matrizCeldas[i][j];
 			aux.actualizarImagen(imagenes.getGrisVacio());
