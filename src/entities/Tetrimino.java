@@ -5,16 +5,17 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public abstract class Tetrimino {
-	//Atributos de clase
 	protected ImageIcon Photo; 
 	protected int rotacion; 
 	protected ArrayList<Celda> listaCeldas;
 	protected ImageIcon MiImagen;
-	//Constructor
-	public Tetrimino(int rotacion, ImageIcon Photo, Celda c1, Celda c2, Celda c3, Celda c4)  {
+	protected ImagenesEscaladas imagenes;
+	
+	public Tetrimino(int rotacion, Celda c1, Celda c2, Celda c3, Celda c4)  {
 		listaCeldas = new ArrayList<Celda>();
 		this.rotacion = rotacion;
-		this.Photo = Photo;
+		this.imagenes=new ImagenesEscaladas();
+		
 		listaCeldas.add(c1);
 		listaCeldas.add(c2);
 		listaCeldas.add(c3);
@@ -29,7 +30,6 @@ public abstract class Tetrimino {
 
 	abstract public ArrayList<PairTupla> rotar(ArrayList<PairTupla> antiguas); 
 	
-	//A modificar
 	public ArrayList<Celda> getCeldas(){
 		return listaCeldas;
 	}
@@ -53,9 +53,7 @@ public abstract class Tetrimino {
 	}
 	
 	public ArrayList<PairTupla> moverDerecha(ArrayList<PairTupla> futuras) {
-		//Esto se puede optimizar probablemente
 		ArrayList<PairTupla> retorno = new ArrayList<PairTupla>();
-		//Esto se puede optimizar probablemente
 		for(int i = 0; i<=3; i++) {
 			Celda aux = listaCeldas.get(i); 
 			int xc = aux.getX();
@@ -68,9 +66,7 @@ public abstract class Tetrimino {
 	}
 	
 	public ArrayList<PairTupla> moverIzquierda(ArrayList<PairTupla> futuras){
-		//Esto se puede optimizar probablemente
 		ArrayList<PairTupla> retorno = new ArrayList<PairTupla>();
-		//Esto se puede optimizar probablemente
 		for(int i = 0; i<=3; i++) {
 			Celda aux = listaCeldas.get(i); 
 			int xc = aux.getX();
@@ -84,9 +80,7 @@ public abstract class Tetrimino {
 	
 	
 	public ArrayList<PairTupla> moverAbajo(ArrayList<PairTupla> futuras){
-		//Esto se puede optimizar probablemente
 		ArrayList<PairTupla> retorno = new ArrayList<PairTupla>();
-				//Esto se puede optimizar probablemente
 		for(int i = 0; i<=3; i++) {
 			Celda aux = listaCeldas.get(i); 
 			int xc = aux.getX();

@@ -36,22 +36,6 @@ public class GUI{
 	private JLabel JLTetriminoSiguiente;
 	
 	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					GUI window = new GUI();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
 	 * Create the application.
 	 */
 	public GUI() {
@@ -62,9 +46,7 @@ public class GUI{
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		//Listener Eventos
-		
+	private void initialize() {		
 		EventoDeTeclado tecla=new EventoDeTeclado();
 		frmTetris = new JFrame();
 		frmTetris.setTitle("Tetris");
@@ -77,83 +59,77 @@ public class GUI{
 		
 		jugando = true;
 			
-			
-			PPerdiste = new JPanel();
-			PPerdiste.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			PPerdiste.setForeground(Color.WHITE);
-			PPerdiste.setBounds(0, 335, 335, 142);
-			//		PMatriz.add(PPerdiste);
-					frmTetris.getContentPane().add(PPerdiste);
-					PPerdiste.setBackground(new Color(0, 0, 0));
-					PPerdiste.setLayout(null);
-					
-					JButton btnNewButton = new JButton("Volver al menu");
-					btnNewButton.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							EventQueue.invokeLater(new Runnable() {
-								public void run() {
-									try {
-										GUIMenu Nframe = new GUIMenu();
-										Nframe.setVisible(true);
-										frmTetris.dispose();
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
-								}
-							});
+		PPerdiste = new JPanel();
+		PPerdiste.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		PPerdiste.setForeground(Color.WHITE);
+		PPerdiste.setBounds(0, 335, 335, 142);
+		frmTetris.getContentPane().add(PPerdiste);
+		PPerdiste.setBackground(new Color(0, 0, 0));
+		PPerdiste.setLayout(null);
+		
+		JButton btnNewButton = new JButton("Volver al menu");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIMenu Nframe = new GUIMenu();
+							Nframe.setVisible(true);
+							frmTetris.dispose();
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
-					});
-					btnNewButton.setBounds(109, 87, 118, 23);
-					PPerdiste.add(btnNewButton);
-					
-					JLPerdiste = new JLabel("JUEGO TERMINADO");
-					JLPerdiste.setBounds(10, 0, 320, 112);
-					PPerdiste.add(JLPerdiste);
-					JLPerdiste.setForeground(Color.WHITE);
-					JLPerdiste.setBackground(new Color(255, 255, 255));
-					JLPerdiste.setToolTipText("");
-					JLPerdiste.setHorizontalAlignment(SwingConstants.CENTER);
-					JLPerdiste.setFont(new Font("Yu Gothic Light", Font.PLAIN, 20));
-					PPerdiste.setVisible(false);
+					}
+				});
+			}
+		});
+		btnNewButton.setBounds(109, 87, 118, 23);
+		PPerdiste.add(btnNewButton);
+		
+		JLPerdiste = new JLabel("JUEGO TERMINADO");
+		JLPerdiste.setBounds(10, 0, 320, 112);
+		PPerdiste.add(JLPerdiste);
+		JLPerdiste.setForeground(Color.WHITE);
+		JLPerdiste.setBackground(new Color(255, 255, 255));
+		JLPerdiste.setToolTipText("");
+		JLPerdiste.setHorizontalAlignment(SwingConstants.CENTER);
+		JLPerdiste.setFont(new Font("Yu Gothic Light", Font.PLAIN, 20));
+		PPerdiste.setVisible(false);
 	
-		//Panel donde se crea la matriz
 		PMatriz = new JPanel();
 		PMatriz.setBorder(null);
 		PMatriz.setBackground(new Color(0, 0, 0));
-		PMatriz.setBounds(42, 27, 250, 630); //PMatriz.setBounds(20, 25, 356, 678); //
+		PMatriz.setBounds(42, 27, 250, 630); 
 		frmTetris.getContentPane().add(PMatriz);
 		PMatriz.setLayout(null);
 		
-			PTiempo_Puntos_TetriminoS = new JPanel();
-			PTiempo_Puntos_TetriminoS.setBounds(0, 0, 250, 100);
-			PMatriz.add(PTiempo_Puntos_TetriminoS);
-			PTiempo_Puntos_TetriminoS.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			PTiempo_Puntos_TetriminoS.setBackground(new Color(0, 0, 0));
-			PTiempo_Puntos_TetriminoS.setLayout(null);
-			
-			
-			JLTiempo = new JLabel("00:00");
-			JLTiempo.setVerticalAlignment(SwingConstants.TOP);
-			JLTiempo.setForeground(Color.WHITE);
-			JLTiempo.setFont(new Font("Yu Gothic Light", Font.PLAIN, 48));
-			JLTiempo.setBounds(10, 10, 203, 52);
-			PTiempo_Puntos_TetriminoS.add(JLTiempo);
-			
-			JLPuntaje = new JLabel("Puntos: 0");
-			JLPuntaje.setVerticalAlignment(SwingConstants.TOP);
-			JLPuntaje.setForeground(Color.WHITE);
-			JLPuntaje.setFont(new Font("Yu Gothic Light", Font.PLAIN, 20));
-			JLPuntaje.setBounds(10, 66, 230, 25);
-			PTiempo_Puntos_TetriminoS.add(JLPuntaje);
-			
-			//necesitamos que el random aparezca antes, osea crear un metodo para el random
-			//y tener q imagen y tetrimino siguiente viene
-			JLTetriminoSiguiente = new JLabel("");
-			JLTetriminoSiguiente.setBounds(180, 25, 60, 48);
-			PTiempo_Puntos_TetriminoS.add(JLTetriminoSiguiente);
-			JLTetriminoSiguiente.setForeground(new Color(0, 128, 0));
-			JLTetriminoSiguiente.setBackground(Color.WHITE);
+		PTiempo_Puntos_TetriminoS = new JPanel();
+		PTiempo_Puntos_TetriminoS.setBounds(0, 0, 250, 100);
+		PMatriz.add(PTiempo_Puntos_TetriminoS);
+		PTiempo_Puntos_TetriminoS.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		PTiempo_Puntos_TetriminoS.setBackground(new Color(0, 0, 0));
+		PTiempo_Puntos_TetriminoS.setLayout(null);
 		
+		
+		JLTiempo = new JLabel("00:00");
+		JLTiempo.setVerticalAlignment(SwingConstants.TOP);
+		JLTiempo.setForeground(Color.WHITE);
+		JLTiempo.setFont(new Font("Yu Gothic Light", Font.PLAIN, 48));
+		JLTiempo.setBounds(10, 10, 203, 52);
+		PTiempo_Puntos_TetriminoS.add(JLTiempo);
+		
+		JLPuntaje = new JLabel("Puntos: 0");
+		JLPuntaje.setVerticalAlignment(SwingConstants.TOP);
+		JLPuntaje.setForeground(Color.WHITE);
+		JLPuntaje.setFont(new Font("Yu Gothic Light", Font.PLAIN, 20));
+		JLPuntaje.setBounds(10, 66, 230, 25);
+		PTiempo_Puntos_TetriminoS.add(JLPuntaje);
+		
+		JLTetriminoSiguiente = new JLabel("");
+		JLTetriminoSiguiente.setBounds(180, 25, 60, 48);
+		PTiempo_Puntos_TetriminoS.add(JLTetriminoSiguiente);
+		JLTetriminoSiguiente.setForeground(new Color(0, 128, 0));
+		JLTetriminoSiguiente.setBackground(Color.WHITE);
 		
 		JLabel label;
 		for(int i = 0; i<labels[0].length;i++) {
@@ -181,7 +157,6 @@ public class GUI{
 		
 	}
 	
-	// gui ya tiene que saber cual es el proximo, el random lo tenemos que hacer antes
 	public void actualizarTetriminoSiguiente(ImageIcon imagen){
 		Image EscalarFoto = imagen.getImage().getScaledInstance(JLTetriminoSiguiente.getWidth(),JLTetriminoSiguiente.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon FotoEscalada = new ImageIcon(EscalarFoto);
@@ -197,7 +172,6 @@ public class GUI{
 		
 	}
 	
-	//actualiza la imagen
 	public void actualizarCelda(int fila, int columna, ImageIcon imagen) {
 		labels[fila][columna].setIcon(imagen);
 	}
@@ -222,18 +196,9 @@ public class GUI{
 		JLTiempo.setText(minutos+":"+segundos);
 	}
 
-
-
-	
 	
 	class EventoDeTeclado implements KeyListener{
-		public void keyTyped(KeyEvent e) {
-			
-			}
-			
-		
-		
-	//se capta cuando se presionan las teclas izq,der,arriba
+		public void keyTyped(KeyEvent e) {}
 		public void keyPressed(KeyEvent e) {
 			if(jugando) {
 				if(e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -253,9 +218,6 @@ public class GUI{
 							
 			}
 		}
-
-		public void keyReleased(KeyEvent e) {
-						
-		}
+		public void keyReleased(KeyEvent e) {}
 	}
 }
