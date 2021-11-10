@@ -243,7 +243,7 @@ public class GUI{
 						captarMovimientoDer();
 					}else
 						if((e.getKeyCode() == KeyEvent.VK_UP)) {
-							captarOpcionRotar();
+
 						}else {
 							if(e.getKeyCode() == KeyEvent.VK_DOWN) {
 								//captarAbajoNormalizarPausa();
