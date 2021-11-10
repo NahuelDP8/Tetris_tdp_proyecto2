@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -17,13 +16,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.awt.Desktop;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
-import javax.swing.ImageIcon;
 
 public class GUIMenu extends JFrame {
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**

@@ -4,8 +4,7 @@ import java.util.ArrayList;
 public class PiezaI extends Tetrimino{
 
 	public PiezaI(int rotacion, Celda c1, Celda c2, Celda c3, Celda c4) {
-		super(rotacion, null,c1,c2,c3,c4);
-		ImagenesEscaladas imagenes=new ImagenesEscaladas();
+		super(rotacion,c1,c2,c3,c4);
 		this.setImageIcon(imagenes.getCeleste());
 		MiImagen=imagenes.getICeleste();
 	}
